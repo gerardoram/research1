@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.codehaus.groovy</groupId>
+  <artifactId>groovy</artifactId>
+  <version>1.6.10-SNAPSHOT</version>
+  <versioning>
+    <latest>1.6.10-SNAPSHOT</latest>
+    <release>1.6.10-SNAPSHOT</release>
+    <versions>
+      <version>1.6.10-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20150325173818</lastUpdated>
+  </versioning>
+</metadata>

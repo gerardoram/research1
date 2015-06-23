@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-project</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<groupId>com.hybris.cis.ext</groupId>
+	<artifactId>hybris-cis-archetypes</artifactId>
+  <version>5.5.1.0.24</version>
+	<packaging>pom</packaging>
+	
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>hybris-cis-core-shipping-ext</module>
+				<module>hybris-cis-core-tax-ext</module>
+				<module>hybris-cis-core-avs-ext</module>
+				<module>hybris-cis-core-fraud-ext</module>
+				<module>hybris-cis-core-geolocation-ext</module>
+				<module>hybris-cis-core-payment-ext</module>
+				<module>hybris-cis-core-subscription-ext</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>sbg</id>
+			<modules>
+				<module>hybris-cis-core-subscription-ext</module>
+			</modules> 
+		</profile>
+	</profiles>
+</project>

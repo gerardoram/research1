@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Wed Apr 29 21:36:29 CEST 2015
+dataonboarding-rest-resources-5.5.1.11.jar>=
+dataonboarding-rest-resources-5.5.1.11.pom>=
+dataonboarding-rest-resources-5.5.1.11-tests.jar>=

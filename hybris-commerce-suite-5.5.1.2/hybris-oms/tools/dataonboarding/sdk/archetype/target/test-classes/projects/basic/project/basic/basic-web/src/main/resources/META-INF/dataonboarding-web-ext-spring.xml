@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <import resource="classpath:/META-INF/basic-oms-inventory-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-basestore-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-bin-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-location-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-formula-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-client-spring.xml"/>
+
+    <util:list id="localizationFiles">
+		<value>classpath:/localization/dataonboarding</value>
+		<value>classpath:/localization/oms-bin</value>
+		<value>classpath:/localization/oms-basestore</value>
+		<value>classpath:/localization/oms-inventory</value>
+		<value>classpath:/localization/oms-location</value>
+		<value>classpath:/localization/oms-ext-bin</value>
+		<value>classpath:/localization/oms-ext-basestore</value>
+		<value>classpath:/localization/oms-ext-inventory</value>
+		<value>classpath:/localization/oms-ext-location</value>
+		<value>classpath:/localization/oms-ext-formula</value>
+	</util:list>
+</beans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.hybris.oms</groupId>
+  <artifactId>oms-facade</artifactId>
+  <versioning>
+    <release>5.5.1.11</release>
+    <versions>
+      <version>5.5.1.11</version>
+    </versions>
+    <lastUpdated>20150429193700</lastUpdated>
+  </versioning>
+</metadata>

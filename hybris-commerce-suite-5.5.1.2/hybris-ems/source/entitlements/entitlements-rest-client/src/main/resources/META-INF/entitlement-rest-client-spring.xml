@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+    <context:component-scan base-package="com.hybris.services.entitlements" />
+    <context:spring-configured />
+
+    <import resource="classpath:/META-INF/hybris-commons-configuration-spring.xml"/>
+    <import resource="classpath:/META-INF/hybris-commons-rest-client-spring.xml"/>
+
+	<alias name="defaultEntitlementRestClient" alias="entitlementFacade"/>
+    <bean id="defaultEntitlementRestClient" class="com.hybris.services.entitlements.client.DefaultEntitlementRestClient"
+          parent="genericRestClient">
+        <property name="endpointProvider">
+            <bean class="com.hybris.commons.client.SimpleEndpointProvider">
+                <property name="endpointURI" value="${ems.client.endpoint.uri}"/>
+            </bean>
+        </property>
+        <property name="endpointName" value=""/>
+        <property name="mediaType" value="${hybris.rest.client.media.type:application/json}"/>
+        <property name="httpClient" ref="entitlementHttpClient"/>
+    </bean>
+
+  <bean id="entitlementHttpClient" class="com.hybris.commons.client.HttpClientFactory">
+    <property name="httpConnectionManager" ref="httpConnectionManager"/>
+    <property name="clientConfig" ref="entitlementsHttpClientConfig"/>
+    <property name="apiKeyProvider" ref="apiKeyProviderFactory"/>
+    <property name="httpClientParams" ref="httpClientParams"/>
+    <property name="apiAuthenticationEnabled" value="${hybris.security.api.authentication.enable}"/>
+    <property name="loggingFilter" ref="hybrisCommonsRestClientLoggingFilter"/>
+    <property name="loggingFilterEnabled" value="${hybris.rest.client.logging.enabled:false}"/>
+  </bean>
+
+  <alias name="entitlementsHttpClientConfig" alias="httpClientConfig"/>
+    <bean id="entitlementsHttpClientConfig" class="com.hybris.services.entitlements.client.EntitlementsRestClientConfigFactory"/>
+
+    <alias name="defaultDateTimeConverter" alias="dateTimeConverter"/>
+    <bean id="defaultDateTimeConverter" class="com.hybris.services.entitlements.conversion.impl.DefaultDateTimeConverter"/>
+
+    <bean id="restResponseHandlerRegistry" class="com.hybris.commons.client.RestResponseHandlerRegistry">
+        <property name="handlers">
+            <list>
+                <ref bean="objectNotFoundResponseHandler"/>
+                <ref bean="preconditionFailedResponseHandler"/>
+                <ref bean="unprocessableEntityResponseHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="objectNotFoundResponseHandler"
+          class="com.hybris.services.entitlements.client.response.handler.ObjectNotFoundResponseHandler"/>
+
+    <bean id="preconditionFailedResponseHandler"
+          class="com.hybris.services.entitlements.client.response.handler.PreconditionFailedResponseHandler"/>
+
+    <bean id="unprocessableEntityResponseHandler"
+          class="com.hybris.services.entitlements.client.response.handler.UnprocessableEntityResponseHandler"/>
+</beans>

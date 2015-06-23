@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hybris.services.entitlements</groupId>
+        <artifactId>entitlements-project</artifactId>
+        <version>5.5.1.0-RC13</version>
+    </parent>
+
+    <modules>
+        <module>entitlements-test-configuration</module>
+        <module>entitlements-service</module>
+        <module>entitlements-api</module>
+        <module>entitlements-facade</module>
+        <module>entitlements-web</module>
+		<module>entitlements-rest-client</module>
+		<module>entitlements-test</module>
+    </modules>
+
+    <artifactId>entitlements</artifactId>
+    <packaging>pom</packaging>
+    <name>entitlements</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hybris.kernel</groupId>
+            <artifactId>init-app</artifactId>
+            <version>${hybris.kernel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-conversion</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-rest-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-rest-client</artifactId>
+            <classifier>tests</classifier>
+        </dependency>
+    </dependencies>
+</project>

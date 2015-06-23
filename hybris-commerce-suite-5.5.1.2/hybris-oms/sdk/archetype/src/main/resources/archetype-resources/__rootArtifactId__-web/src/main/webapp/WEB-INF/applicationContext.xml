@@ -1,0 +1,51 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<tx:annotation-driven />
+
+	<aop:aspectj-autoproxy />
+
+	<context:annotation-config />
+
+	<!-- Commons -->
+	<import resource="classpath:/META-INF/hybris-commons-rest-client-spring.xml" />
+	<import resource="classpath:/META-INF/hybris-commons-rest-resources-spring-standalone.xml" />
+	<import resource="classpath:/META-INF/hybris-commons-jmx-spring.xml" />
+
+    <!-- User Management -->
+    <import resource="classpath:/META-INF/commons-web-authorization-spring-security-webapp.xml"/>
+
+	<!-- Misc -->
+	<import resource="classpath:/META-INF/oms-core-service-kernel-spring.xml" />
+	<import resource="classpath:/META-INF/migration-services-spring.xml" />
+
+	<!-- OMS -->
+	<import resource="classpath:/META-INF/oms-facade-spring.xml" />
+	<import resource="classpath:/META-INF/oms-facade-conversion-spring.xml" />
+	<import resource="classpath:/META-INF/oms-service-all-spring.xml" />
+	<import resource="classpath:/META-INF/oms-rest-resources-log-spring.xml" />
+
+	<!-- Export -->
+	<import resource="classpath:/META-INF/oms-export-service-spring.xml" />
+	<import resource="classpath:/META-INF/oms-export-facade-spring.xml" />
+	
+	<!-- UI -->
+	<import resource="classpath:/META-INF/oms-ui-facade-spring.xml" />
+	<import resource="classpath:/META-INF/oms-ui-facade-conversion-spring.xml" />
+
+	<!-- Init-App -->
+	<import resource="classpath:/META-INF/initapp-rest-servlet-spring.xml" />
+	<import resource="classpath:/META-INF/initapp-web-servlet-spring.xml" />
+
+	<!-- Import extension spring.xml files here. (Such as extension facade or service) -->
+	<import resource="classpath:/META-INF/${parentArtifactId}-service-spring.xml" />
+</beans>

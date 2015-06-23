@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>javax.cache</groupId>
+  <artifactId>cache-api</artifactId>
+  <version>1.0.0-PFD</version>
+  <versioning>
+    <latest>1.0.0-PFD</latest>
+    <release>1.0.0-PFD</release>
+    <versions>
+      <version>1.0.0-PFD</version>
+    </versions>
+    <lastUpdated>20150325173818</lastUpdated>
+  </versioning>
+</metadata>

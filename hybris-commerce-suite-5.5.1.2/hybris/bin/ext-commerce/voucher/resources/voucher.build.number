@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Apr 23 11:56:24 CEST 2015
+builddate=20150423 1156
+description=voucher
+name=voucher
+releasedate=20150420 1004
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

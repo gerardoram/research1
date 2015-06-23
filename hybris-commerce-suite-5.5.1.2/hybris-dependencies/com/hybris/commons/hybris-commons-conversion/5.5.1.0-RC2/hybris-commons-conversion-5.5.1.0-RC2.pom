@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>hybris-commons-framework</artifactId>
+		<version>5.5.1.0-RC2</version>
+	</parent>
+	<artifactId>hybris-commons-conversion</artifactId>
+	<name>hybris-commons-conversion</name>
+
+	<dependencies>
+		<!-- hybris Commons -->
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-dto</artifactId>
+		</dependency>
+
+		<!-- Kernel -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-service</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>

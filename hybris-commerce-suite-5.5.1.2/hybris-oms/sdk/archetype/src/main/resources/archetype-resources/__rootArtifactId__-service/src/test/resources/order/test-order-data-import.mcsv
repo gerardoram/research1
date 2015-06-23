@@ -1,0 +1,8 @@
+OrderData,classpath:/order/import-order.csv
+OrderLineData,classpath:/order/import-orderLine.csv
+OrderLineData.locationRoles,classpath:/order/import-orderLine-locationRoles.csv
+OrderLineQuantityData,classpath:/order/import-orderLineQuantity.csv
+OrderLineAttributeData,classpath:/order/import-orderLineAttribute.csv
+OrderLineQuantityStatusData,classpath:/order/import-orderLineQuantityStatus.csv
+PaymentInfoData,classpath:/order/import-paymentInfo.csv
+TenantPreferenceData,classpath:/order/import-tenantPreference.csv

@@ -1,0 +1,200 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>hybris-cis-api</artifactId>
+		<groupId>com.hybris.cis</groupId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-api-subscription</artifactId>
+	<name>hybris-cis-api-subscription</name>
+	
+	<properties>
+		<enunciate.skip>false</enunciate.skip>
+        <org.aspectj.version>1.8.1</org.aspectj.version>
+        <skipTests>false</skipTests>
+	</properties>
+
+	<dependencies>
+
+        <!-- Spring 4 compatability -->
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.0.0-PFD</version>
+        </dependency>
+
+		<!-- COMPILE -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+		</dependency>
+      	<dependency>
+        	<groupId>commons-lang</groupId>
+        	<artifactId>commons-lang</artifactId>
+      	</dependency>
+      	<dependency>
+        	<groupId>commons-io</groupId>
+        	<artifactId>commons-io</artifactId>
+      	</dependency>
+		
+		<!-- TEST -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-common</artifactId>
+			<scope>test</scope>
+			<classifier>tests</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-test</artifactId>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- Hybris kernel -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-api</artifactId>
+			<version>${hybris.kernel.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hybris.atdd</groupId>
+			<artifactId>atdd-plus-engine</artifactId>
+			<version>5.5.1.0-RC1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Workaround for spring aspect bug. Need by atdd engine. see https://jira.springsource.org/browse/SPR-6819 -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<!-- to make test classes available to other modules -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- to make source classes available to enunciate -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-dump</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.hybris.atddengine.Processor</mainClass>
+					<arguments>
+						<argument>${basedir}</argument>
+						<argument>${project.build.directory}</argument>
+					</arguments>
+					<classpathScope>test</classpathScope>
+				</configuration>
+			</plugin>
+
+			<!-- Wipe ATDD proxies on clean -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/test/java/generated</directory>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>test-compile</id>
+						<configuration>
+							<source>1.7</source>
+							<target>1.7</target>
+							<verbose>false</verbose>
+							<aspectLibraries>
+								<aspectLibrary>
+									<groupId>org.springframework</groupId>
+									<artifactId>spring-aspects</artifactId>
+								</aspectLibrary>
+								<aspectLibrary>
+									<groupId>com.hybris.atdd</groupId>
+									<artifactId>atdd-plus-engine</artifactId>
+								</aspectLibrary>
+							</aspectLibraries>
+							<showWeaveInfo>true</showWeaveInfo>
+						</configuration>
+						<goals>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${org.aspectj.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${org.aspectj.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+	
+</project>

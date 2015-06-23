@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+	</parent>
+
+
+	<groupId>com.hybris.oms</groupId>
+	<artifactId>order-management-system-project</artifactId>
+	<version>5.5.1.11</version>
+	<name>order-management-system-project</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>order-management-system</module>
+		<module>oms-ext</module>
+	</modules>
+
+
+	<properties>
+		<environment>local</environment>
+
+		<hybris.oms.core.version>5.5.1.0-RC4</hybris.oms.core.version>
+		<hybris.commons-framework.version>5.5.1.0-RC2</hybris.commons-framework.version>
+		<hybris.kernel.version>5.5.1.0-RC4</hybris.kernel.version>
+		<hybris-cis.version>5.5.1.0.24</hybris-cis.version>
+
+		<!--  DO NOT USE ${project.version} or ${parent.version} here. -->
+		<hybris.oms.version>5.5.1.11</hybris.oms.version>
+
+		<maven-enunciate-plugin.version>${maven.enunciate.plugin.version}</maven-enunciate-plugin.version>
+
+		<sonar.doxygen.generateDocumentation>enable</sonar.doxygen.generateDocumentation>
+		<sonar.doxygen.generateCallGraphs>true</sonar.doxygen.generateCallGraphs>
+		<sonar.doxygen.generateCallerGraphs>true</sonar.doxygen.generateCallerGraphs>
+
+	</properties>
+
+	<scm>
+		<connection>scm:git:ssh://git@stash.hybris.com/oms/oms.git</connection>
+		<developerConnection>scm:git:ssh://git@stash.hybris.com/oms/oms.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-commons-archetype</artifactId>
+					<version>${hybris.commons-framework.version}</version>
+					<configuration>
+						<filterArtifacts>oms-ext</filterArtifacts>
+						<packageName>com.hybris.oms.ext</packageName>
+						<ignoredFileList>**/oms-ext.iml,**/index.html,**/com.hybris.oms.ext_oms-ext-web.properties
+						</ignoredFileList>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- OMS-Core -->
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-api</artifactId>
+				<version>${hybris.oms.core.version}</version>
+				<classifier>sdk</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-service</artifactId>
+				<version>${hybris.oms.core.version}</version>
+				<classifier>sdk</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-rest-client</artifactId>
+				<version>${hybris.oms.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-rest-resources</artifactId>
+				<version>${hybris.oms.core.version}</version>
+			</dependency>
+
+			<!-- OMS -->
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-domain-objects</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-domain-objects</artifactId>
+				<version>${hybris.oms.version}</version>
+				<classifier>sdk</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-service</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-service</artifactId>
+				<version>${hybris.oms.version}</version>
+				<classifier>sdk</classifier>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-service</artifactId>
+				<version>${hybris.oms.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-api</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-facade</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-facade</artifactId>
+				<version>${hybris.oms.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-rest-resources</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-rest-client</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-domain-objects</artifactId>
+				<version>${hybris.oms.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-rest-webapp</artifactId>
+				<version>${hybris.oms.version}</version>
+				<classifier>classes</classifier>
+			</dependency>
+
+			<!-- OMS Export -->
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-export-api</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-export-service</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-export-facade</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-export-rest-client</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-export-rest-resources</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+
+			<!-- OMS UI -->
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-api</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-api</artifactId>
+				<classifier>sdk</classifier>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-service</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-facade</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-rest-client</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-ui-rest-resources</artifactId>
+				<version>${hybris.oms.version}</version>
+			</dependency>
+
+			<!-- CIS -->
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-geolocation-rest-client</artifactId>
+				<version>${hybris-cis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-payment-rest-client</artifactId>
+				<version>${hybris-cis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-shipping-rest-client</artifactId>
+				<version>${hybris-cis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-tax-rest-client</artifactId>
+				<version>${hybris-cis.version}</version>
+			</dependency>
+
+			<!-- Commons Framework -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-dto</artifactId>
+				<version>${hybris.commons-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-conversion</artifactId>
+				<version>${hybris.commons-framework.version}</version>
+			</dependency>
+
+			<!-- PowerMock -->
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>1.4.12</version>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>1.4.12</version>
+			</dependency>
+
+			<!-- Fluent Assertions -->
+			<dependency>
+				<groupId>org.easytesting</groupId>
+				<artifactId>fest-assert</artifactId>
+				<version>1.4</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Javamail -->
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.5</version>
+			</dependency>
+
+			<!-- Mvel for templates -->
+			<dependency>
+				<groupId>org.mvel</groupId>
+				<artifactId>mvel2</artifactId>
+				<version>2.1.0.Final</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- For resolving of superpom -->
+	<repositories>
+		<repository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>Alfresco Maven Repository</id>
+			<url>https://maven.alfresco.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+    <!-- For resolving of superpom java doc generation problem with java 1.8-->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+
+                <configuration combine.children="append">
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

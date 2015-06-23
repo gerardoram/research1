@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 25 16:16:34 UTC 2015
+builddate=20150325 1616
+description=financialfacades
+name=financialfacades
+releasedate=20150311 1421
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

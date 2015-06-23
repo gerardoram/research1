@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.1.2.1</version>
+		<relativePath />
+	</parent>
+
+	<artifactId>hybris-commons-utils</artifactId>
+	<version>5.1.2.1</version>
+
+	<name>hybris-commons-utils</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>hybris-commons-rest-client</module>
+		<module>hybris-commons-tenant</module>
+		<module>hybris-commons-context</module>
+		<module>hybris-commons-configuration</module>
+		<module>hybris-commons-mock</module>
+		<module>hybris-commons-tenant-rest-client</module>
+		<module>hybris-commons-test-configuration</module>
+		<module>hybris-commons-activemq-local</module>
+		<module>hybris-commons-activemq-local-webapp</module>
+		<module>hybris-commons-security</module>
+		<module>hybris-commons-rest-resources</module>
+		<module>hybris-commons-lang</module>
+		<module>hybris-commons-monitoring</module>
+	</modules>
+
+	<properties>
+			<!-- There is a compilation problem with the jersey references, we skip report generation it for now -->
+			<enunciate.skip>true</enunciate.skip>
+	</properties>
+	
+	<scm>
+		<connection>scm:git:ssh://stash.hybris.com/status/commons-utils.git</connection>
+		<developerConnection>scm:git:ssh://stash.hybris.com/status/commons-utils.git</developerConnection>
+		<tag>v5.1.2.1</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>dranura-release</id>
+			<url>https://repository.hybris.com/dranura-release</url>
+		</repository>
+		<snapshotRepository>
+			<id>dranura-snapshot</id>
+			<url>https://repository.hybris.com/dranura-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	
+	
+	
+</project>

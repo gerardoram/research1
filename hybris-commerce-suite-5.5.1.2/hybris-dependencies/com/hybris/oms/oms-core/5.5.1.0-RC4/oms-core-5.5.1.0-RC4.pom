@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+	</parent>
+
+
+	<groupId>com.hybris.oms</groupId>
+	<artifactId>oms-core</artifactId>
+	<version>5.5.1.0-RC4</version>
+	<name>oms-core</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>oms-core-api</module>
+		<module>oms-core-rest-client</module>
+		<module>oms-core-rest-resources</module>
+		<module>oms-core-service</module>
+	</modules>
+
+	<properties>
+		<environment>local</environment>
+
+		<hybris.commons.version>5.5.1.0-RC1</hybris.commons.version>
+		<hybris.commons-framework.version>5.5.1.0-RC2</hybris.commons-framework.version>
+		<hybris.kernel.version>5.5.1.0-RC4</hybris.kernel.version>
+
+		<slf4j.version>1.7.10</slf4j.version>
+		<logback.version>1.0.13</logback.version>
+
+		<maven-enunciate-plugin.version>${maven.enunciate.plugin.version}</maven-enunciate-plugin.version>
+
+		<sonar.doxygen.generateDocumentation>enable</sonar.doxygen.generateDocumentation>
+		<sonar.doxygen.generateCallGraphs>true</sonar.doxygen.generateCallGraphs>
+		<sonar.doxygen.generateCallerGraphs>true</sonar.doxygen.generateCallerGraphs>
+
+		<jgiflow.version>1.0-m4.3</jgiflow.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:ssh://git@stash.hybris.com/oms/oms-core.git</connection>
+		<developerConnection>scm:git:ssh://git@stash.hybris.com/oms/oms-core.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- OMS-Core -->
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-rest-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-rest-resources</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.oms</groupId>
+				<artifactId>oms-core-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- Kernel -->
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-api</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-service</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-aggregation</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>jdbc-aggregation</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>jdbc-engine</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-scheduler</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-utils</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-test-utils</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+
+			<!-- Init-App -->
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>init-app</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>init-app-api</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>init-app-rest-client</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+
+			<!-- hybris Commons -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-configuration</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-context</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-monitoring</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-tenant</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-rest-client</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-rest-resources</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-tenant-rest-client</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-mock</artifactId>
+				<version>${hybris.commons.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.hybris.commons</groupId>
+			    <artifactId>hybris-commons-web-authorization</artifactId>
+			    <version>${hybris.commons.version}</version>
+			</dependency>
+
+			<!-- Commons-Framework -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-dto</artifactId>
+				<version>${hybris.commons-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-conversion</artifactId>
+				<version>${hybris.commons-framework.version}</version>
+			</dependency>
+
+			<!-- PowerMock -->
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+
+			<!-- slf4j implementation => logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- For resolving of superpom -->
+	
+
+	
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>${jgiflow.version}</version>
+				<configuration>
+					<flowInitContext>
+						<masterBranchName>master</masterBranchName>
+						<developBranchName>develop</developBranchName>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/oms-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<versionTagPrefix>v</versionTagPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

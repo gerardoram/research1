@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hybris.dataonboarding.ext</groupId>
+        <artifactId>dataonboarding-ext-oms</artifactId>
+		<version>5.5.1.11</version>
+    </parent>
+
+    <artifactId>dataonboarding-ext-oms-formula</artifactId>
+    <name>dataonboarding-ext-oms-formula</name>
+
+    <dependencies>
+    
+        <dependency>
+            <groupId>com.hybris.dataonboarding.ext</groupId>
+            <artifactId>dataonboarding-ext-oms-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- dataonboarding dependencies -->
+    </dependencies>
+    
+</project>

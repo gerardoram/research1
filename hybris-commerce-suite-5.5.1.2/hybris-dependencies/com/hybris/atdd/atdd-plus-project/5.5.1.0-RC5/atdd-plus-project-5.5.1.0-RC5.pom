@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+	</parent>
+	
+
+	<modules>
+		<module>atdd-plus</module>
+	</modules>
+	
+	<scm>
+		<connection>scm:git:ssh://stash.hybris.com/noaccess/atdd-plus.git</connection>
+		<developerConnection>scm:git:ssh://stash.hybris.com/noaccess/atdd-plus.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<groupId>com.hybris.atdd</groupId>
+    <artifactId>atdd-plus-project</artifactId>
+    <packaging>pom</packaging>
+    <version>5.5.1.0-RC5</version>
+    <name>atdd-plus-project</name>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-deps-maven-license-plugin</artifactId>
+					<version>5.1.0</version>
+					<configuration>
+						<excludedScopes>test,provided</excludedScopes>
+						<licenseDefinitions>
+							<licenseDefinition>asm:asm:3.1=INRIA, France Telecom License (2000-2011)</licenseDefinition>
+							<licenseDefinition>classworlds:classworlds:1.1-alpha-2=The Codehaus License Version 1.1.1.1</licenseDefinition>
+							<licenseDefinition>commons-cli:commons-cli:1.0=The Apache Software License, Version 1.1</licenseDefinition>
+							<licenseDefinition>commons-logging:commons-logging-api:1.0.4=Apache License Version 2.0</licenseDefinition>
+							<licenseDefinition>com.oracle:ojdbc6:11.2.0.3=Oracle Technology Network Development and Distribution License</licenseDefinition>
+							<licenseDefinition>dom4j:dom4j:1.6.1=Copyright 2001-2005 (C) MetaStuff, Ltd.</licenseDefinition>
+							<licenseDefinition>dom4j:dom4j:1.4=BSD style</licenseDefinition>
+							<licenseDefinition>jdom:jdom:1.0=2000-2004 Jason Hunter &amp; Brett McLaughlin.</licenseDefinition>
+							<licenseDefinition>isorelax:isorelax:20020414=LICENCE NOT FOUND at http://iso-relax.sourceforge.net/ "MIT License" ACCORDING TO</licenseDefinition>
+							<licenseDefinition>javax.servlet:jstl:1.1.2=LICENSE NOT FOUND probably "Sun Binary Code License Agreement"</licenseDefinition>
+							<licenseDefinition>jaxen:jaxen:1.0-FCS=2000-2002 bob mcwhirter &amp; James Strachan</licenseDefinition>
+							<licenseDefinition>msv:msv:20020414=LICENCE NOT FOUND, SRC Points out "Copyright 2001 Sun Microsystems, Inc."</licenseDefinition>
+							<licenseDefinition>org.apache.zookeeper:zookeeper:3.4.5=Apache License Version 2.0</licenseDefinition> <licenseDefinition>org.codehaus.jettison:jettison:1.1=Apache License Version 2.0</licenseDefinition>
+							<licenseDefinition>oro:oro:2.0.8=The Apache Software License, Version 1.1</licenseDefinition>
+							<licenseDefinition>org.codehaus.plexus:plexus-cli:1.2=Apache License Version 2.0</licenseDefinition>
+							<licenseDefinition>org.codehaus.plexus:plexus-container-default:1.0-alpha-8=Apache License Version 2.0</licenseDefinition>
+							<licenseDefinition>org.codehaus.plexus:plexus-utils:1.0.4=Apache License Version 2.0</licenseDefinition>
+							<licenseDefinition>relaxngDatatype:relaxngDatatype:20020414=LICENSE NOT FOUND probably "Thai Open Source Software Center Ltd, Sun Microsystems."</licenseDefinition>
+							<licenseDefinition>saxpath:saxpath:1.0-FCS=2000-2002 werken digital</licenseDefinition>
+							<licenseDefinition>taglibs:c:1.1.2=LICENSE NOT FOUND probably "Sun Binary Code License Agreement"</licenseDefinition>
+							<licenseDefinition>taglibs:fmt:1.1.2=LICENSE NOT FOUND probably "Sun Binary Code License Agreement"</licenseDefinition>
+							<licenseDefinition>taglibs:standard:1.1.2=LICENSE NOT FOUND probably "Sun Binary Code License Agreement"</licenseDefinition>
+
+							<licenseDefinition>org.codehaus.enunciate:enunciate-core-annotations:1.27=Apache License Version 2.0</licenseDefinition>
+
+						</licenseDefinitions>
+						<allowedLicenses>
+							<allowedLicense>hybris Commercial License, Version 1.0</allowedLicense>
+							<allowedLicense>Apache Software Licenses</allowedLicense>
+							<allowedLicense>The Apache Software License, Version 1.1</allowedLicense>
+							<allowedLicense>The Apache Software License, Version 2.0</allowedLicense>
+							<allowedLicense>LICENSE NOT FOUND probably "Sun Binary Code License Agreement"</allowedLicense>
+							<allowedLicense>INRIA, France Telecom License (2000-2011)</allowedLicense>
+							<allowedLicense>Copyright 2001-2005 (C) MetaStuff, Ltd.</allowedLicense>
+							<allowedLicense>BSD style</allowedLicense>
+							<allowedLicense>Eclipse Public License, Version 1.0</allowedLicense>
+							<allowedLicense>The MIT License</allowedLicense>
+							<allowedLicense>CDDL + GPLv2 with classpath exception</allowedLicense>
+							<allowedLicense>GNU Lesser Public License</allowedLicense>
+							<allowedLicense>GNU Lesser General Public License</allowedLicense>
+							<allowedLicense>GNU Library or Lesser General Public License</allowedLicense>
+							<allowedLicense>GNU Lesser General Public License (LGPL), Version 2.1</allowedLicense>
+							<allowedLicense>*GNU General Public License - Version 2 / CPE*</allowedLicense>
+							<allowedLicense>Public Domain</allowedLicense>
+							<allowedLicense>WTFPL</allowedLicense>
+							<allowedLicense>MPL 1.1</allowedLicense>
+							<allowedLicense>The SAX License</allowedLicense>
+							<allowedLicense>The W3C License</allowedLicense>
+							<allowedLicense>HSQLDB License, a BSD open source license</allowedLicense>
+							<allowedLicense>Mozilla Public License version 1.1</allowedLicense>
+							<allowedLicense>CDDL License</allowedLicense>
+							<allowedLicense>CDDL 1.1</allowedLicense>
+							<allowedLicense>*CDDL - Version 1.1 / GNU General Public License - Version 2*</allowedLicense>
+							<allowedLicense>The BSD License</allowedLicense>
+							<allowedLicense>New BSD License</allowedLicense>
+							<allowedLicense>Common Public License Version 1.0</allowedLicense>
+							<allowedLicense>The Codehaus License Version 1.1.1.1</allowedLicense>
+							<allowedLicense>2000-2002 bob mcwhirter &amp; James Strachan</allowedLicense>
+							<allowedLicense>2000-2002 werken digital</allowedLicense>
+							<allowedLicense>2000-2004 Jason Hunter &amp; Brett McLaughlin.</allowedLicense>
+							<allowedLicense>LICENCE NOT FOUND, SRC Points out "Copyright 2001 Sun Microsystems,Inc."</allowedLicense>
+							<allowedLicense>LICENSE NOT FOUND probably "Thai Open Source Software Center Ltd, Sun Microsystems."</allowedLicense>
+							<allowedLicense>LICENCE NOT FOUND at http://iso-relax.sourceforge.net/ "MIT License" ACCORDING TO</allowedLicense>
+							<allowedLicense>Oracle Technology Network Development and Distribution License</allowedLicense>
+						</allowedLicenses>
+						<licenseAliases>
+							<licenseAlias>
+								The Apache Software License, Version 2.0|
+								*Apache Software License - Version 2.0*|
+								Apache Public License 2.0|
+								Apache License 2.0|
+								ASF 2.0|
+								Apache 2|Apache 2.0|
+								Apache License|
+								Apache License Version 2.0|
+								Apache License, Version 2.0|
+								Apache v2</licenseAlias>
+							<licenseAlias>The BSD License | *BSD License| BSD| BSD style*| BSD-style License|BSD-like|BSD style</licenseAlias>
+							<licenseAlias>Common Public License Version 1.0|*Common Public License - Version 1.0*|CPL</licenseAlias>
+							<licenseAlias>Eclipse Public License, Version 1.0|*Eclipse Public License - Version 1.0*|Eclipse Public License - v 1.0|Eclipse Public License v1.0</licenseAlias>
+							<licenseAlias>CDDL License|*CDDL - Version 1.0*|CDDL|CDDL 1.0|COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</licenseAlias>
+							<licenseAlias>*CDDL - Version 1.1 / GNU General Public License - Version 2*|CDDL v1.1 / GPL v2 dual license\|CDDL + GPLv2 with classpath exception|Dual license consisting of the CDDL v1.1 and GPL v2</licenseAlias>
+							<licenseAlias>Educational Community License, Version 2.0|*Educational Community License - Version 2.0*</licenseAlias>
+							<licenseAlias>GNU Lesser General Public License|GNU LESSER GENERAL PUBLIC LICENSE|*GNU Lesser General Public License*|lgpl|license.txt</licenseAlias>
+							<licenseAlias>GNU Lesser General Public License (LGPL), Version 2.1|*GNU Lesser General Public License - Version 2.1|*GNU Lesser General Public License Version 2.1|LGPL 2.1\|LGPL, version 2.1|LGPL 2.1</licenseAlias>
+							<licenseAlias>GNU Lesser General Public License - Version 3.0|*GNU Lesser General Public License - Version 3|*GNU Lesser General Public License v3.0</licenseAlias>
+							<licenseAlias>The GNU General Public License, Version 2|*GNU General Public License - Version 2*</licenseAlias>
+							<licenseAlias>Mozilla Public License version 1.1|*Mozilla Public License - Version 1.1*|MPL 1.1</licenseAlias>
+							<licenseAlias>*GNU General Public License - Version 2 / CPE*|GPL2 w/ CPE|GPLv2+CE</licenseAlias>
+							<licenseAlias>The MIT License|MIT License</licenseAlias>
+						</licenseAliases>
+					</configuration>
+				</plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!-- For resolving of superpom -->
+    
+
+    
+</project>

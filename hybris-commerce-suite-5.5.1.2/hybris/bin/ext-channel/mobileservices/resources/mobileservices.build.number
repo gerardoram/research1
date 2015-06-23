@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 11 06:54:56 CET 2015
+builddate=20150311 0654
+description=mobileservices
+name=mobileservices
+releasedate=20150307 1800
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

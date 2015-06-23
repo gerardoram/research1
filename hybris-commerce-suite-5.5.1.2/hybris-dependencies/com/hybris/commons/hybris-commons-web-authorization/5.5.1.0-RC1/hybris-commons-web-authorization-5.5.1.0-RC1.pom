@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>hybris-commons-utils</artifactId>
+		<version>5.5.1.0-RC1</version>
+	</parent>
+
+	<artifactId>hybris-commons-web-authorization</artifactId>
+	<name>hybris-commons-web-authorization</name>
+
+	<dependencies>
+		<dependency>
+		   <groupId>com.hybris.commons</groupId>
+		   <artifactId>hybris-commons-context</artifactId>
+		   <version>5.1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-jersey-server</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-spring-security</artifactId>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency> <!-- classes using @Secured and not implementing an interface require cglib at runtime for proxying -->
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+		</dependency>
+	</dependencies>
+</project>

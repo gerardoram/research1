@@ -1,0 +1,5 @@
+it/pkg/oms/formula/FormulaUpdateEndpointAdapter.class
+it/pkg/oms/formula/FormulaDeleteEndpointAdapter.class
+it/pkg/oms/formula/FormulaInsertEndpointAdapter.class
+it/pkg/oms/formula/Map2FormulaTransformer.class
+it/pkg/oms/formula/FormulaErrorCode.class

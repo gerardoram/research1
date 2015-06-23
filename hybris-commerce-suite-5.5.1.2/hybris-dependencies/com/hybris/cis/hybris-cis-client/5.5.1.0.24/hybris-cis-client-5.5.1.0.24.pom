@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	 
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-project</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-client</artifactId>
+	<name>hybris-cis-client</name>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>hybris-cis-rest-client</module>
+  </modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-avs</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-tax</artifactId>
+				<version>${project.version}</version>				
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-payment</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-shipping</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-geolocation</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-fraud</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-subscription</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-shared</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<!-- common -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-rest-client</artifactId>
+				<version>${com.hybris.commons.utils}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>log4j-over-slf4j</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-tenant-rest-client</artifactId>
+				<version>${com.hybris.commons.utils}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>log4j-over-slf4j</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-mock</artifactId>
+				<version>${com.hybris.commons.utils}</version>
+			</dependency>
+
+
+
+
+			<!-- server modules for tests -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-rest-client</artifactId>
+				<version>${com.hybris.commons.utils}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-api-shared</artifactId>
+				<version>${project.version}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-shared</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-avs</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-tax</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-payment</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-subscription</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-shipping</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-geolocation</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+				<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-web-fraud</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-test-configuration</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+</project>

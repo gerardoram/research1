@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>hybris-superpom</artifactId>
+		<version>5.1.0</version>
+		<relativePath />
+	</parent>
+	
+	<groupId>com.hybris.robotframework.lib</groupId>
+	<artifactId>robotframework-project</artifactId>
+	<version>0.15.0</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>commercewebservicesgroovy</module>
+		<module>webservice-keywords</module>
+	</modules>
+	
+	<scm>
+		<connection>scm:hg:https://bitbucket.org/hybris/robot-framework-libs/</connection>
+		<developerConnection>scm:hg:https://bitbucket.org/hybris/robot-framework-libs/</developerConnection>
+	  <tag>0.15.0</tag>
+  </scm>
+	
+	<!-- For resolving of superpom -->
+    
+    
+</project>

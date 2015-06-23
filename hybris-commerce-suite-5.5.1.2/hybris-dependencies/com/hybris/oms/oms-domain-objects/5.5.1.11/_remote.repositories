@@ -1,0 +1,6 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Wed Apr 29 21:37:51 CEST 2015
+oms-domain-objects-5.5.1.11-tests.jar>=
+oms-domain-objects-5.5.1.11.jar>=
+oms-domain-objects-5.5.1.11-sdk.jar>=
+oms-domain-objects-5.5.1.11.pom>=

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<enunciate label = "OMSaaa" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation = "http://enunciate.codehaus.org/schemas/enunciate-1.26.xsd">
+
+
+    <modules>
+        <!-- Docs -->
+        <docs splashPackage="com.hybris" title="REST API" copyright="hybris.com" includeDefaultDownloads="false" disableRestMountpoint="true"/>
+        <c disabled = "true" />
+        <obj-c disabled = "true" />
+        <csharp disabled = "true" />
+    </modules>
+</enunciate>
+
+

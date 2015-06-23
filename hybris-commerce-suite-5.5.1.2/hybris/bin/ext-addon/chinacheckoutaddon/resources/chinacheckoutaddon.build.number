@@ -1,0 +1,9 @@
+#Ant properties
+#Fri Feb 27 15:23:23 UTC 2015
+builddate=20150227 1523
+description=chinacheckoutaddon
+name=chinacheckoutaddon
+releasedate=20150211 1543
+vendor=hybris
+version=5.5.0.0-M3
+version.api=5.5.0

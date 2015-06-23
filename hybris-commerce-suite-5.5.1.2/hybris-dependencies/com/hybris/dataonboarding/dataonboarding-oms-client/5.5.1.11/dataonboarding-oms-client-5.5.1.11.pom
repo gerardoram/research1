@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hybris.dataonboarding</groupId>
+		<artifactId>dataonboarding-oms</artifactId>
+		<version>5.5.1.11</version>
+	</parent>
+	
+	<artifactId>dataonboarding-oms-client</artifactId>
+	<name>dataonboarding-oms-client</name>
+
+	<dependencies>
+		<dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-tenant-rest-client</artifactId>
+            <version>${hybris.commons.version}</version>
+            <type>jar</type>
+        </dependency>
+        
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-api</artifactId>
+			<version>${hybris.oms.version}</version>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>kernel-api</artifactId>
+            		<groupId>com.hybris.kernel</groupId>
+            	</exclusion>
+            </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-rest-client</artifactId>
+			<version>${hybris.oms.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

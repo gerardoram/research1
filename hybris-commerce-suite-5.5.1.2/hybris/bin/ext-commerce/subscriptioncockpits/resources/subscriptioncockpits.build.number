@@ -1,0 +1,9 @@
+#Ant properties
+#Tue Mar 24 17:02:14 CET 2015
+builddate=20150324 1702
+description=subscriptioncockpits
+name=subscriptioncockpits
+releasedate=20150323 1451
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

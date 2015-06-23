@@ -1,0 +1,44 @@
+id,type,property,description_en,value,version,enabled
+TenantPreferenceData|1,preftype_atscalculator,ats.calculator,Select ATS calculator,WEB,1, TRUE
+TenantPreferenceData|2,preftype_atsglobalthreshold,ats.global.threshold,Global ATS absolute threshold,0,1, TRUE
+TenantPreferenceData|3,preftype_olqstatus,olqstatus.sourced,Assign sourced status,SOURCED,1, TRUE
+TenantPreferenceData|4,preftype_olqstatus,olqstatus.allocated,Assign allocated status,ALLOCATED,1, TRUE
+TenantPreferenceData|5,preftype_olqstatus,olqstatus.picked,Assign pick status,PICKED,1, TRUE
+TenantPreferenceData|6,preftype_olqstatus,olqstatus.packed,Assign pack status,PACKED,1, TRUE
+TenantPreferenceData|7,preftype_olqstatus,olqstatus.shipped,Assign shipped status,SHIPPED,1, TRUE
+TenantPreferenceData|8,preftype_olqstatus,olqstatus.payment_captured,Assign payment captured status,PAYMENT_CAPTURED,1, TRUE
+TenantPreferenceData|9,preftype_olqstatus,olqstatus.tax_invoiced,Assign tax invoiced status,TAX_INVOICED,1, TRUE
+TenantPreferenceData|10,preftype_olqstatus,olqstatus.manual_declined,Assign manual declined status,MANUAL_DECLINED,1, TRUE
+TenantPreferenceData|11,preftype_itemgrouping,itemgrouping,Minimize Shipments,FALSE,1, TRUE
+TenantPreferenceData|12,preftype_ordersplitstrategy,order.split.strategy,allow Split Order,SPLIT,1, TRUE
+TenantPreferenceData|13,preftype_orderlinesplitstrategy,orderline.split.strategy,allow Split OrderLines,SPLIT,1, TRUE
+TenantPreferenceData|14,preftype_sourcingorderlevel,sourcinglevel.order,Sequence at order level,"DISTANCE,SEQUENCE",1, TRUE
+TenantPreferenceData|15,preftype_sourcingorderlinelevel,sourcinglevel.orderline,Sequence at orderline level,"DISTANCE,SEQUENCE",1, TRUE
+TenantPreferenceData|16,preftype_sourcingorderlinequantitylevel,sourcinglevel.orderlinequantity,Sequence at orderlinequantity level,"ATS,DISTANCE,SEQUENCE",1, TRUE
+TenantPreferenceData|17,preftype_workflowtask,workflow.execution.task.fulfillment,Execute or skip workflow task 'Fulfillment',TRUE,1, TRUE
+TenantPreferenceData|19,preftype_workflowtask,workflow.execution.task.paymentCapture,Execute or skip workflow task 'Payment Capture',TRUE,1, TRUE
+TenantPreferenceData|20,preftype_workflowtask,workflow.execution.task.taxInvoice,Execute or skip workflow task 'Tax Invoice',TRUE,1, TRUE
+TenantPreferenceData|21,preftype_attribute,attribute.attribute1,Title attribute 1,OrderLineAttribute 1,1,TRUE
+TenantPreferenceData|22,preftype_attribute,attribute.attribute2,Title attribute 2,OrderLineAttribute 2,1,TRUE
+TenantPreferenceData|23,preftype_attribute,attribute.attribute3,Title attribute 3,OrderLineAttribute 3,1,TRUE
+TenantPreferenceData|24,preftype_bin,bin.sequencing,Bin sequencing,BIN_CODE,1,TRUE
+TenantPreferenceData|25,preftype_bin,bin.number,Number of bins to display,6,1,TRUE
+TenantPreferenceData|26,preftype_inventory,inventory.scenario,Bin level inventory scenario,NONE,1,TRUE
+TenantPreferenceData|27,preftype_bin,bin.direction,Direction of bin sequencing,ASC,1,TRUE
+TenantPreferenceData|28,preftype_olqstatus,olqstatus.canceled,Assign canceled status,CANCELLED,1, TRUE
+TenantPreferenceData|29,preftype_workflow_return,workflow.return.include.shipping.cost,include shipping cost in return,True,1, TRUE
+TenantPreferenceData|30,preftype_shipped_status,return.shipped.status,List of shipped status (separate by a pipe),TAX_INVOICED|SHIPPED|DONE,1, TRUE
+TenantPreferenceData|32,preftype_olqstatus,olqstatus.on_hold,Assign on hold status,ON_HOLD,1, TRUE
+TenantPreferenceData|33,preftype_olqstatus,olqstatus.failedpayment,Assign failed payment capture status,FAILED_PAYMENT,1, TRUE
+TenantPreferenceData|34,preftype_olqstatus,olqstatus.failedtax,Assign failed tax invoice status,FAILED_TAX,1, TRUE
+TenantPreferenceData|35,preftype_shipindays,ship.in.days,Define days within which shipping needs to be done,2,1, TRUE
+TenantPreferenceData|36,preftype_moduleprop,moduleprop.shipmentWidthValue,Shipment width value,1,1, TRUE
+TenantPreferenceData|37,preftype_moduleprop,moduleprop.shipmentLengthValue,Shipment length value,1,1, TRUE
+TenantPreferenceData|38,preftype_moduleprop,moduleprop.shipmentHeightValue,Shipment height value,1,1, TRUE
+TenantPreferenceData|39,preftype_moduleprop,moduleprop.shipmentHeightUnitCode,Shipment height unit code,cm,1, TRUE
+TenantPreferenceData|40,preftype_moduleprop,moduleprop.shipmentGrossWeightValue,Shipment gross weight value,15,1, TRUE
+TenantPreferenceData|41,preftype_moduleprop,moduleprop.shipmentGrossWeightUnitCode,Shipment gross weight unit code,KG,1, TRUE
+TenantPreferenceData|42,preftype_moduleprop,moduleprop.shipmentInsuranceValueAmountValue,Shipment insurance amount value,100,1, TRUE
+TenantPreferenceData|43,preftype_moduleprop,moduleprop.shipmentDescription,Shipment description,OTHER GOODS,1, TRUE
+TenantPreferenceData|44,preftype_moduleprop,moduleprop.atsFormulasFilter,ATS formulas filter,;,1, TRUE
+TenantPreferenceData|45,preftype_moduleprop,moduleprop.atsLocationsFilter,ATS locations filter,;,1, TRUE

@@ -1,0 +1,9 @@
+#Ant properties
+#Tue May 19 22:37:01 CEST 2015
+builddate=20150519 2236
+description=instore
+name=instore
+releasedate=20150211 1543
+vendor=hybris
+version=5.5.0.0-M3
+version.api=5.5.0

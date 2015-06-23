@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Mar 26 16:54:37 CET 2015
+builddate=20150326 1654
+description=dataonboardingbackoffice
+name=dataonboardingbackoffice
+releasedate=20150326 0717
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

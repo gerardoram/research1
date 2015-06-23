@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Feb 25 16:46:59 UTC 2015
+builddate=20150225 1646
+description=classificationsystemshmc
+name=classificationsystemshmc
+releasedate=20150224 1105
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

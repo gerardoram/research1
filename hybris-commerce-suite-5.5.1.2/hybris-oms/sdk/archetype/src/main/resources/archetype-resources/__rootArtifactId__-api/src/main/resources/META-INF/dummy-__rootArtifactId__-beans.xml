@@ -1,0 +1,53 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.hybris.com/schema/onpremise/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.hybris.com/schema/onpremise/beans http://www.hybris.com/schema/onpremise/beans-5.3.xsd">
+
+
+<!-- Sample of usage of the DTO generation -->
+
+	<!-- Add a new property to an existing DTO -->
+	<package name="com.hybris.oms.domain.order">
+		<bean name="Order">
+			<description>Extended Order.</description>
+			<property name="dummyNewProp" type="String" />
+		</bean>
+	</package>
+
+
+	<!-- New DTO description -->
+	<package name="${package}.api.dto">
+		<bean name="DummyObject" extend="com.hybris.commons.dto.impl.PropertyAwareEntityDto">
+			<description>Sample DTO for ${parentArtifactId}ension</description>
+			<annotations>
+				<value>@javax.xml.bind.annotation.XmlRootElement</value>
+				<value>@javax.xml.bind.annotation.XmlAccessorType(javax.xml.bind.annotation.XmlAccessType.FIELD)</value>
+			</annotations>
+
+
+			<property name="name" type="String">
+				<annotations>
+					<value>@javax.xml.bind.annotation.XmlID</value>
+				</annotations>
+			</property>
+
+			<property name="dummyProperty" type="String"/>
+
+			<customCode>
+				<![CDATA[
+	@Override
+	public String getId()
+	{
+		return this.name;
+	}
+						]]>
+			</customCode>
+		</bean>
+	</package>
+
+
+</beans>
+

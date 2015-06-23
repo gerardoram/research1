@@ -1,0 +1,31 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d [%-5level][%t][%c][%X{tenant}][%X{requestId}] %m%n</Pattern>
+		</encoder>
+	</appender>
+
+	<logger name="javax.validation" level="info"/>
+
+	<logger name="org.springframework.beans.factory" level="warn"/>
+	<logger name="org.springframework.transaction" level="info"/>
+	<logger name="org.springframework.validation" level="info"/>
+	<logger name="org.springframework.test" level="warn"/>
+	<logger name="org.apache.commons.httpclient" level="info"/>
+	<logger name="httpclient.wire" level="info"/>
+	<logger name="org.jgroups.protocols.UDP" level="error"/>
+
+	<logger name="com.hybris.dataonboarding" level="debug"/>
+	<logger name="com.hybris.kernel.engine.jdbc" level="info"/>
+
+	<root level="info">
+		<appender-ref ref="STDOUT"/>
+	</root>
+
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+		<resetJUL>true</resetJUL>
+	</contextListener>
+</configuration>

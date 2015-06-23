@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-rest-client</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-rest-common</artifactId>
+	<name>hybris-cis-rest-common</name>
+    <packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-test-configuration</artifactId>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- common -->
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-rest-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-mock</artifactId>
+        </dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+<!-- 			<version>${spring.version}</version> -->
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-rest-client</artifactId>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-shared</artifactId>
+			<scope>test</scope>
+			<classifier>tests</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-jersey-test</artifactId>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

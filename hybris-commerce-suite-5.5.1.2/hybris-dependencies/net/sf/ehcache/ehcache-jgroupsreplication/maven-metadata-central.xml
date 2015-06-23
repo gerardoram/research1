@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>net.sf.ehcache</groupId>
+  <artifactId>ehcache-jgroupsreplication</artifactId>
+  <version>1.7</version>
+  <versioning>
+    <latest>1.7</latest>
+    <release>1.7</release>
+    <versions>
+      <version>1.7</version>
+    </versions>
+    <lastUpdated>20150325173818</lastUpdated>
+  </versioning>
+</metadata>

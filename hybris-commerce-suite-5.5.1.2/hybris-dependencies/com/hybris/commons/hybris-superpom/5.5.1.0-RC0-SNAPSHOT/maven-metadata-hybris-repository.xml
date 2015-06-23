@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.hybris.commons</groupId>
+  <artifactId>hybris-superpom</artifactId>
+  <version>5.5.1.0-RC0-20141217.111938-1</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20141217.111938</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20141217111925</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>5.5.1.0-RC0-20141217.111938-1</value>
+        <updated>20141217111938</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

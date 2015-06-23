@@ -1,0 +1,9 @@
+#Ant properties
+#Mon Mar 16 16:57:37 CET 2015
+builddate=20150316 1657
+description=ondemandcommon
+name=ondemandcommon
+releasedate=20150224 1105
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

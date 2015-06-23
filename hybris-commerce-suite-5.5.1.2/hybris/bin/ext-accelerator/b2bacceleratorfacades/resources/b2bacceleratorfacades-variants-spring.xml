@@ -1,0 +1,111 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <alias name="defaultProductVariantFacade" alias="b2bProductFacade"/>
+    <bean id="defaultProductVariantFacade"
+          class="de.hybris.platform.b2bacceleratorfacades.product.impl.DefaultProductVariantFacade"
+          parent="defaultProductFacade">
+        <property name="productConfiguredPopulator" ref="b2bProductConfiguredPopulator"/>
+     </bean>
+
+    <bean id="b2bProductConfiguredPopulator" parent="defaultProductConfiguredPopulator">
+        <property name="populators">
+            <map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+                <entry key="PRICE_RANGE" value-ref="productPriceRangePopulator"/>
+                <entry key="VOLUME_PRICES" value-ref="productVolumePricesPopulator"/>
+                <entry key="VARIANT_MATRIX" value-ref="productVariantMatrixPopulator"/>
+                <entry key="VARIANT_MATRIX_BASE" value-ref="productVariantMatrixPopulator"/>
+                <entry key="VARIANT_MATRIX_ALL_OPTIONS" value-ref="configVariantMatrixDataPopulator"/>
+                <entry key="VARIANT_MATRIX_URL" value-ref="configVariantOptionDataUrlPopulator"/>
+                <entry key="VARIANT_MATRIX_MEDIA" value-ref="configVariantOptionDataMediaPopulator"/>
+                <entry key="VARIANT_MATRIX_PRICE" value-ref="configVariantOptionDataPricePopulator"/>
+                <entry key="VARIANT_MATRIX_STOCK" value-ref="configVariantOptionDataStockPopulator"/>
+                <entry key="URL" value-ref="productUrlPopulator"/>
+                <entry key="IMAGES" value-ref="productPrimaryImagePopulator"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <alias name="defaultBasicProductSearchOptions" alias="productBasicSearchOptions"/>
+    <util:list id="defaultBasicProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>SUMMARY</value>
+        <value>DESCRIPTION</value>
+        <value>URL</value>
+        <value>PRICE</value>
+        <value>IMAGES</value>
+        <value>STOCK</value>
+        <value>CATEGORIES</value>
+        <value>BASIC</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_URL</value>
+    </util:list>
+
+    <alias name="defaultVariantProductSearchOptions" alias="productVariantSearchOptions"/>
+    <util:list id="defaultVariantProductSearchOptions" value-type="de.hybris.platform.commercefacades.product.ProductOption">
+        <value>CATEGORIES</value>
+        <value>VARIANT_MATRIX_BASE</value>
+        <value>VARIANT_MATRIX_ALL_OPTIONS</value>
+    </util:list>
+
+
+    <bean name="abstractOrderGenericDao" class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao" >
+        <constructor-arg value="AbstractOrder" />
+    </bean>
+
+    <alias name="defaultB2BSolrProductSearchFacade" alias="b2bSolrProductSearchFacade"/>
+    <bean id="defaultB2BSolrProductSearchFacade"
+          class="de.hybris.platform.b2bacceleratorfacades.search.impl.DefaultB2BSolrProductSearchFacade"
+          parent="defaultSolrProductSearchFacade">
+        <property name="productSearchPageVariantsPopulator" ref="productSearchPageVariantsPopulator" />
+    </bean>
+
+
+    <bean id="productSearchPageVariantsPopulator" class="de.hybris.platform.b2bacceleratorfacades.search.converters.populator.ProductSearchPageVariantsPopulator">
+        <property name="productConfiguredPopulator" ref="b2bProductConfiguredPopulator" />
+        <property name="b2bProductFacade" ref="b2bProductFacade" />
+        <property name="productService" ref="productService" />
+        <property name="productSearchOptions" ref="productVariantSearchOptions"/>
+    </bean>
+
+    <alias name="defaultB2BFlexibleSearchProductSearchFacade" alias="b2bProductFlexibleSearchFacade"/>
+    <bean id="defaultB2BFlexibleSearchProductSearchFacade"
+          class="de.hybris.platform.b2bacceleratorfacades.search.impl.DefaultB2BFlexibleSearchProductSearchFacade">
+        <property name="b2bFlexibleSearchProductSearchService" ref="b2bFlexibleSearchProductSearchService"/>
+        <property name="flexibleSearchConverter" ref="b2bFlexibleSearchConverter"/>
+        <property name="productSearchPageVariantsPopulator" ref="productSearchPageVariantsPopulator" />
+    </bean>
+
+    <!-- Converter & Populator beans - END -->
+    <bean id="abstractMultidimensionalProductFieldValueProvider" abstract="true"
+          class="de.hybris.platform.b2bacceleratorfacades.search.solrfacetsearch.provider.AbstractMultidimensionalProductFieldValueProvider"
+          parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <alias name="defaultFirstGenericVariantProductUrlValueProvider" alias="firstGenericVariantProductUrlValueProvider"/>
+    <bean id="defaultFirstGenericVariantProductUrlValueProvider"
+          class="de.hybris.platform.b2bacceleratorfacades.search.solrfacetsearch.provider.impl.FirstGenericVariantProductUrlValueProvider"
+          parent="abstractMultidimensionalProductFieldValueProvider">
+        <property name="productModelUrlResolver" ref="productModelUrlResolver"/>
+        <property name="genericVariantProductModelComparator" ref="genericVariantProductModelComparator"/>
+    </bean>
+
+    <bean id="genericVariantProductModelComparator"
+          class="de.hybris.platform.b2bacceleratorfacades.search.solrfacetsearch.provider.entity.GenericVariantProductModelComparator">
+        <property name="variantValueCategoryModelPriorityComparator" ref="variantValueCategoryModelPriorityComparator"/>
+    </bean>
+
+    <bean id="variantValueCategoryModelPriorityComparator"
+          class="de.hybris.platform.b2bacceleratorfacades.search.solrfacetsearch.provider.entity.VariantValueCategoryModelPriorityComparator">
+        <property name="categoryService" ref="categoryService"/>
+    </bean>
+
+</beans>
+

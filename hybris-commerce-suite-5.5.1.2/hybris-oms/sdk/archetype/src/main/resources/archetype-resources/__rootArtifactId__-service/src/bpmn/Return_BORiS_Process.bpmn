@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="ReturnProcess" name="Return Process" isExecutable="true">
+    <extensionElements>
+      <activiti:executionListener event="start" expression="${returnStartProcessExecutionListener.notify(execution)}"></activiti:executionListener>
+      <activiti:executionListener event="end" expression="${returnEndProcessExecutionListener.notify(execution)}"></activiti:executionListener>
+    </extensionElements>
+    <startEvent id="StartReturnProcess" name="Start Return Process">
+      <extensionElements>
+        <activiti:formProperty id="returnId" name="returnId" type="string" variable="returnId" required="true"></activiti:formProperty>
+        <activiti:formProperty id="orderId" name="orderId" type="string" variable="orderId" required="true"></activiti:formProperty>
+        <activiti:formProperty id="tenantContext" name="tenantContext" type="string" variable="tenantContext"></activiti:formProperty>
+        <activiti:formProperty id="message" name="message" type="string" variable="message"></activiti:formProperty>
+        <activiti:formProperty id="result" name="result" type="string" variable="result" default="true"></activiti:formProperty>
+      </extensionElements>
+    </startEvent>
+    <endEvent id="EndReturnProcess" name="End Return Process"></endEvent>
+    <serviceTask id="CalculateRefund" name="Calculate Refund amount " activiti:async="true" activiti:exclusive="false" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_RETURN_CALCULATE')}"></serviceTask>
+    <serviceTask id="CaptureRefund" name="Capture Refund" activiti:async="true" activiti:exclusive="false" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_RETURN_CAPTURE')}"></serviceTask>
+    <serviceTask id="CaptureFail" name="Fail Capture" activiti:async="true" activiti:exclusive="false" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_FAIL_CAPTURE')}"></serviceTask>
+    <serviceTask id="SuccessCapture" name="Success Capture" activiti:async="true" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_SUCCESS_CAPTURE')}"></serviceTask>
+    <serviceTask id="InventoryUpdate" name="Inventory Update" activiti:async="true" activiti:exclusive="false" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_INVENTORY_UPDATE')}"></serviceTask>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow1" sourceRef="StartReturnProcess" targetRef="CalculateRefund"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="CaptureRefund" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="exclusivegateway1" targetRef="CaptureFail">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!result}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" name=" modify to handle failure" sourceRef="CaptureFail" targetRef="ConfirmRefund_UserTask"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="exclusivegateway1" targetRef="SuccessCapture">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="InventoryUpdate" targetRef="EndReturnProcess"></sequenceFlow>
+    <serviceTask id="SuccessTaxReverse" name="Success Tax Reverse" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_SUCCESS_TAX_REVERSE')}"></serviceTask>
+    <serviceTask id="TaxReverseFail" name="Fail Tax Reverse" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_FAIL_TAX_REVERSE')}"></serviceTask>
+    <serviceTask id="ReverseTax" name="Tax Reverse" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_RETURN_TAX_REVERSE')}"></serviceTask>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow9" sourceRef="SuccessCapture" targetRef="ReverseTax"></sequenceFlow>
+    <sequenceFlow id="flow10" sourceRef="ReverseTax" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow12" sourceRef="exclusivegateway2" targetRef="TaxReverseFail">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!result}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="TaxReverseFail" targetRef="FixTaxReverse_UserTask"></sequenceFlow>
+    <sequenceFlow id="flow14" sourceRef="SuccessTaxReverse" targetRef="InventoryUpdate"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="exclusivegateway2" targetRef="SuccessTaxReverse">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow17" name="auto refund" sourceRef="exclusivegateway3" targetRef="CaptureRefund">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${action.equals("AUTO_REFUND")}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow18" name="manual refund" sourceRef="exclusivegateway3" targetRef="ReverseTax">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${action.equals("MANUAL_REFUND")}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow19" name="cancel" sourceRef="exclusivegateway3" targetRef="CancelReturn">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${action.equals("CANCEL")}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="UpdateReturn" name="Update Return" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_RETURN_UPDATE')}"></serviceTask>
+    <userTask id="ConfirmRefund_UserTask" name="Confirm Refund">
+      <extensionElements>
+        <activiti:formProperty id="action" name="action" type="string" required="true">
+          <activiti:value id="UPDATE" name="oms.return.update"></activiti:value>
+          <activiti:value id="MANUAL_REFUND" name="oms.return.manualRefund"></activiti:value>
+          <activiti:value id="AUTO_REFUND" name="oms.return.autoREfund"></activiti:value>
+          <activiti:value id="CANCEL" name="oms.return.cancel"></activiti:value>
+        </activiti:formProperty>
+        <activiti:taskListener event="create" expression="${confirmReturnRefundListener.notify(task)}"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow21" sourceRef="CalculateRefund" targetRef="ConfirmRefund_UserTask"></sequenceFlow>
+    <sequenceFlow id="flow22" sourceRef="ConfirmRefund_UserTask" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow23" name="update" sourceRef="exclusivegateway3" targetRef="UpdateReturn">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${action.equals("UPDATE")}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="UpdateReturn" targetRef="ConfirmRefund_UserTask"></sequenceFlow>
+    <serviceTask id="CancelReturn" name="Cancel Return" activiti:expression="#{activitiDelegate.execute(execution, 'WFE_RETURN_CANCELLED')}"></serviceTask>
+    <sequenceFlow id="flow25" sourceRef="CancelReturn" targetRef="EndReturnProcess"></sequenceFlow>
+    <userTask id="FixTaxReverse_UserTask" name="Fix Tax Reverse">
+      <extensionElements>
+        <activiti:formProperty id="action" name="action" type="string" required="true">
+          <activiti:value id="TAX_FIXED" name="oms.return.taxFixed"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow28" sourceRef="FixTaxReverse_UserTask" targetRef="EndReturnProcess"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ReturnProcess">
+    <bpmndi:BPMNPlane bpmnElement="ReturnProcess" id="BPMNPlane_ReturnProcess">
+      <bpmndi:BPMNShape bpmnElement="StartReturnProcess" id="BPMNShape_StartReturnProcess">
+        <omgdc:Bounds height="35.0" width="35.0" x="20.0" y="285.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndReturnProcess" id="BPMNShape_EndReturnProcess">
+        <omgdc:Bounds height="35.0" width="35.0" x="1436.0" y="282.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CalculateRefund" id="BPMNShape_CalculateRefund">
+        <omgdc:Bounds height="76.0" width="105.0" x="90.0" y="265.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CaptureRefund" id="BPMNShape_CaptureRefund">
+        <omgdc:Bounds height="55.0" width="105.0" x="487.0" y="272.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CaptureFail" id="BPMNShape_CaptureFail">
+        <omgdc:Bounds height="55.0" width="105.0" x="698.0" y="331.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SuccessCapture" id="BPMNShape_SuccessCapture">
+        <omgdc:Bounds height="55.0" width="105.0" x="698.0" y="221.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="InventoryUpdate" id="BPMNShape_InventoryUpdate">
+        <omgdc:Bounds height="55.0" width="105.0" x="1201.0" y="213.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="623.0" y="279.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SuccessTaxReverse" id="BPMNShape_SuccessTaxReverse">
+        <omgdc:Bounds height="80.0" width="105.0" x="1066.0" y="201.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TaxReverseFail" id="BPMNShape_TaxReverseFail">
+        <omgdc:Bounds height="55.0" width="105.0" x="1072.0" y="354.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ReverseTax" id="BPMNShape_ReverseTax">
+        <omgdc:Bounds height="55.0" width="105.0" x="863.0" y="272.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="1003.0" y="279.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="382.0" y="279.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UpdateReturn" id="BPMNShape_UpdateReturn">
+        <omgdc:Bounds height="55.0" width="105.0" x="220.0" y="134.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="CancelReturn" id="BPMNShape_CancelReturn">
+        <omgdc:Bounds height="55.0" width="105.0" x="850.0" y="425.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ConfirmRefund_UserTask" id="BPMNShape_ConfirmRefund_UserTask">
+        <omgdc:Bounds height="65.0" width="105.0" x="216.0" y="267.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="FixTaxReverse_UserTask" id="BPMNShape_FixTaxReverse_UserTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="1210.0" y="354.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="55.0" y="302.0"></omgdi:waypoint>
+        <omgdi:waypoint x="90.0" y="303.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="592.0" y="299.0"></omgdi:waypoint>
+        <omgdi:waypoint x="623.0" y="299.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="643.0" y="319.0"></omgdi:waypoint>
+        <omgdi:waypoint x="642.0" y="358.0"></omgdi:waypoint>
+        <omgdi:waypoint x="698.0" y="358.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="750.0" y="386.0"></omgdi:waypoint>
+        <omgdi:waypoint x="750.0" y="411.0"></omgdi:waypoint>
+        <omgdi:waypoint x="268.0" y="411.0"></omgdi:waypoint>
+        <omgdi:waypoint x="268.0" y="332.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="39.0" width="100.0" x="-32.0" y="-36.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="643.0" y="279.0"></omgdi:waypoint>
+        <omgdi:waypoint x="643.0" y="251.0"></omgdi:waypoint>
+        <omgdi:waypoint x="698.0" y="248.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="1306.0" y="240.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="240.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="282.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="750.0" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="745.0" y="299.0"></omgdi:waypoint>
+        <omgdi:waypoint x="863.0" y="299.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="968.0" y="299.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1003.0" y="299.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="1023.0" y="319.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1023.0" y="382.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1072.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="1177.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1210.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="1171.0" y="241.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1201.0" y="240.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1023.0" y="279.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1023.0" y="241.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1066.0" y="241.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="422.0" y="299.0"></omgdi:waypoint>
+        <omgdi:waypoint x="487.0" y="299.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="56.0" x="-32.0" y="8.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="402.0" y="279.0"></omgdi:waypoint>
+        <omgdi:waypoint x="400.0" y="152.0"></omgdi:waypoint>
+        <omgdi:waypoint x="915.0" y="152.0"></omgdi:waypoint>
+        <omgdi:waypoint x="915.0" y="272.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="69.0" x="10.0" y="0.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="402.0" y="319.0"></omgdi:waypoint>
+        <omgdi:waypoint x="402.0" y="452.0"></omgdi:waypoint>
+        <omgdi:waypoint x="850.0" y="452.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="32.0" x="10.0" y="0.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="195.0" y="303.0"></omgdi:waypoint>
+        <omgdi:waypoint x="216.0" y="299.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="321.0" y="299.0"></omgdi:waypoint>
+        <omgdi:waypoint x="382.0" y="299.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="402.0" y="279.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="189.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="33.0" x="0.0" y="-21.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="272.0" y="189.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="213.0"></omgdi:waypoint>
+        <omgdi:waypoint x="268.0" y="267.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="955.0" y="452.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="452.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="317.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="1315.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1453.0" y="317.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

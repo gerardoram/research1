@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.dataonboarding</groupId>
+		<artifactId>dataonboarding-project</artifactId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<groupId>com.hybris.dataonboarding.ext</groupId>
+	<artifactId>dataonboarding-ext</artifactId>
+	<name>dataonboarding-ext</name>
+	
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>dataonboarding-ext-test-configuration</module>
+		<module>dataonboarding-ext-oms</module>
+		<module>dataonboarding-ext-client</module>
+		<module>dataonboarding-ext-web</module>
+		<module>dataonboarding-ext-api</module>
+	</modules>
+
+
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>init-app-maven-plugin</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</plugin>
+			<!-- @yremovefrom -->
+			<!-- This section will be removed from the generated archetype -->
+			<!-- It is only to build archetype automatically without any manual step -->
+			<!-- and not to deploy extension project to the repository -->
+			<plugin>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-archetype</artifactId>
+				<configuration>
+					<filterArtifacts>dataonboarding-ext</filterArtifacts>
+					<packageName>com.hybris.dataonboarding.ext</packageName>
+					<ignoredFileList>**/dataonboarding-ext.iml,**/index.html,**/com.hybris.dataonboarding_dataonboarding-ext-web.properties</ignoredFileList>
+					<ignoredFileNamesList>.*dataonboarding-ext-rest-servlet-spring.xml,.*dataonboarding-ext-spring.xml</ignoredFileNamesList>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- @yremoveto -->
+		</plugins>
+	</build>
+	
+	<!-- For resolving of superpom -->
+	<repositories>
+		<repository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+		<id>hybris-repository</id>
+		<url>https://repository.hybris.com/hybris-repository</url>
+		<releases>
+			<enabled>true</enabled>
+			<updatePolicy>daily</updatePolicy>
+			<checksumPolicy>warn</checksumPolicy>
+		</releases>
+		<snapshots>
+			<enabled>true</enabled>
+			<updatePolicy>daily</updatePolicy>
+			<checksumPolicy>warn</checksumPolicy>
+		</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

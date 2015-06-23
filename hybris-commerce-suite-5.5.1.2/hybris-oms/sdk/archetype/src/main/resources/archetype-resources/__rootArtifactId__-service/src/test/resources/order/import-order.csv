@@ -1,0 +1,13 @@
+id,orderId,username,shippingMethod,shippingAddress.addressLine1,shippingAddress.cityName,shippingAddress.countrySubentity,shippingAddress.countryIso3166Alpha2Code,shippingAddress.postalZone,shippingAddress.latitudeValue,shippingAddress.longitudeValue,firstName,lastName,emailid,shippingMethod,issueDate,shippingAndHandling,version
+OrderData|1,12,toto,FexEd Standard,123 Fake Street,Montreal,Qc,CA,555555,45.512303,-73.554431,John,A,john@hybris.com,UPSGround,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|3,1
+OrderData|2,23,toto,FexEd Standard,124 Fake Street,Montreal,Qc,CA,111111,0,0,JohnSmith,B,Johnsmith@hybris.com,UPSGround,2012-01-02 4:50:00:000 -0500,ShippingAndHandlingData|4,1
+OrderData|3,34,98765,FexEd Standard,125 Fake Street,Montreal,Qc,CA,222222,45.512303,-73.554431,Fred,C,test@hybris.com,UPSNextDay,2012-01-03 4:50:00:000 -0500,ShippingAndHandlingData|5,1
+OrderData|4,55,toto,FexEd Standard,126 Fake Street,Montreal,Qc,CA,222222,45.512303,-73.554431,TestFirstName,TestLastName,fredrick@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|6,1
+OrderData|5,65,toto,FexEd Standard,127 Fake Street,Montreal,Qc,CA,222222,0,0,Fredrick,D,fredrick@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|7,1
+OrderData|6,75,toto,FexEd Standard,128 Fake Street,Montreal,Qc,CA,222222,0,0,Fredrick,D,test@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|8,1
+OrderData|7,85,toto,FexEd Standard,129 Fake Street,Montreal,Qc,CA,222222,0,0,TestFirstName,TestLastName,fredrick@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|9,1
+OrderData|8,96,toto,FexEd Standard,130 Fake Street,Montreal,Qc,CA,222222,0,0,Fredrick,D,test@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|1,1
+OrderData|9,99,toto,FexEd Standard,130 Fake Street,Montreal,Qc,CA,222222,0,0,Fredrick,D,test@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|10,1
+OrderData|10,100,toto,FexEd Standard,130 Fake Street,Montreal,Qc,CA,222222,0,0,Fredrick,D,test@hybris.com,UPSNextDay,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|11,1
+OrderData|19,OMS141,toto,FexEd Standard,131 Fake Street,Montreal,Qc,CA,M5G2C2,45.512303,-73.554431,John,A,john@hybris.com,UPSGround,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|2,1
+OrderData|20,101,toto,FexEd Standard,131 Fake Street,Montreal,Qc,CA,M5G2C2,45.512303,-73.554431,John,A,john@hybris.com,UPSGround,2012-01-01 4:50:00:000 -0500,ShippingAndHandlingData|12,1

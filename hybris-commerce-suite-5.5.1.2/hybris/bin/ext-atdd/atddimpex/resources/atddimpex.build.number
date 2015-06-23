@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 18 01:06:58 CET 2015
+builddate=20150318 0106
+description=atddimpex
+name=atddimpex
+releasedate=20150316 1401
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

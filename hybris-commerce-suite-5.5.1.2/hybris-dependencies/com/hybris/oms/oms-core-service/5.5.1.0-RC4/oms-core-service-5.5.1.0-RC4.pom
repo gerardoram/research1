@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>oms-core</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.0-RC4</version>
+	</parent>
+
+	<artifactId>oms-core-service</artifactId>
+	<name>oms-core-service</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+		<!-- OMS-Core dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-api</artifactId>
+		</dependency>
+
+		<!-- Kernel dependencies -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-service</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-deps-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-aggregation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>jdbc-aggregation</artifactId>
+		</dependency>
+
+		<!-- Commons dependencies -->
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-spring</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-conversion</artifactId>
+		</dependency>
+
+		<!-- Activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>5.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>5.14</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!--Logback depenencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Testing dependencies -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-test-utils</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-deps-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.168</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>local.properties</exclude>
+					<exclude>logback.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${lifecycle.mapping.version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.kernel</groupId>
+										<artifactId>kernel-codegenerator</artifactId>
+										<versionRange>[$hybris.kernel.version},)</versionRange>
+										<goals>
+											<goal>generatemodels</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.hybris.kernel</groupId>
+					<artifactId>kernel-codegenerator</artifactId>
+					<version>${hybris.kernel.version}</version>
+					<executions>
+						<execution>
+							<id>generatemodels</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generatemodels</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>generate-test-models</id>
+							<phase>generate-test-sources</phase>
+							<goals>
+								<goal>generatemodels</goal>
+							</goals>
+							<configuration>
+								<schemaDirectory>src/test/resources/</schemaDirectory>
+								<generateDirectory>target/generated-test-sources/hybris</generateDirectory>
+								<additionalClasspathElements>
+									<additionalClasspathElement>${project.build.outputDirectory}</additionalClasspathElement>
+								</additionalClasspathElements>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-codegenerator</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classifier>${envClassifier}</classifier>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>sdk</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>sdk</classifier>
+							<excludes>
+								<exclude>**/managedobjects/**</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	
+
+</project>

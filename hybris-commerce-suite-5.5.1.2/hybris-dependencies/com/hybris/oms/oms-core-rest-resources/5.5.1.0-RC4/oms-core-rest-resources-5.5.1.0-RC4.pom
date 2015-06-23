@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>oms-core</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.0-RC4</version>
+	</parent>
+
+	<artifactId>oms-core-rest-resources</artifactId>
+	<name>oms-core-rest-resources</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+	
+		<!-- OMS-Core dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-service</artifactId>
+		</dependency>
+		<dependency>
+   			<groupId>com.hybris.commons</groupId>
+   			<artifactId>hybris-deps-jersey-server</artifactId>
+   			<type>pom</type>
+  		</dependency>
+  		
+  		<!-- Init-App dependencies -->
+  		<dependency>
+		     <groupId>com.hybris.kernel</groupId>
+		     <artifactId>init-app</artifactId>
+		</dependency>
+  		
+  		<!-- Commons -->
+		<dependency>
+		    <groupId>com.hybris.commons</groupId>
+		    <artifactId>hybris-commons-web-authorization</artifactId>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>com.hybris.commons</groupId>
+		    		<artifactId>hybris-commons-context</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-rest-resources</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.enunciate</groupId>
+			<artifactId>enunciate-jersey-rt</artifactId>
+			<version>${maven-enunciate-plugin.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

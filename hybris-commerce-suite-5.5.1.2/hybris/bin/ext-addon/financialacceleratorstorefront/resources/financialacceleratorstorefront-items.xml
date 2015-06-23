@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+    <relations>
+        <relation code="ComparisonPanelCMSComponents2ProductRel" generate="true" localized="false" autocreate="true">
+            <description>This relation links ComparisonPanelCMSComponent with one or more product.</description>
+            <deployment table="ComparPanelComps2ProdRel" typecode="6350"/>
+            <sourceElement qualifier="comparisonPanelCMSComponents" type="ComparisonPanelCMSComponent" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="products" type="Product" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+        <relation code="AllOurServiceComponent2LinkImgRel" generate="true" localized="false" autocreate="true">
+            <description>This relation links CMSLinkImageComponent to a list.</description>
+            <deployment table="AOSComp2LinkImgRel" typecode="6355"/>
+            <sourceElement qualifier="collection" type="CMSAllOurServicesComponent" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="linkImages" type="CMSLinkImageComponent" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+    </relations>
+
+	<itemtypes>
+	
+        <typegroup name="Components">
+
+            <itemtype code="CMSMultiComparisonTabContainer" generate="true" extends="AbstractCMSComponentContainer" autocreate="true"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSMultiComparisonTabContainer">
+                <description>This is container used to group comparison tab components.</description>
+            </itemtype>
+
+            <itemtype code="CMSComparisonTabComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSComparisonTabComponent">
+                <description>It represents comparison tap component. Contains some additional attributes that are required to display comparison panel as a tab.</description>
+                <attributes>
+                    <attribute qualifier="title" generate="true" autocreate="true"
+                               type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <description>Attribute that represents title of the tab.</description>
+                    </attribute>
+                    <attribute qualifier="comparisonPanel" type="ComparisonPanelCMSComponent">
+                        <persistence type="property"/>
+                        <description>Attribute that represents the comparison panel.</description>
+                    </attribute>                
+               		 <attribute qualifier="imageComponent" type="CMSImageComponent">
+                        <persistence type="property"/>
+                        <description>Attribute that represents the Image component.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="ComparisonPanelCMSComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.ComparisonPanelCMSComponent">
+                <description>CMS comparison panel component</description>
+            </itemtype>
+
+            <itemtype code="CMSFormSubmitComponent" autocreate="true" generate="true" extends="YFormCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSFormSubmitComponent">
+                <description>CMS form submit component</description>
+                <attributes>
+                    <attribute qualifier="category" type="Category">
+                        <modifiers read="true" write="true" search="true" optional="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSTripDetailsSubmitComponent" autocreate="true" generate="true" extends="CMSFormSubmitComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSTripDetailsSubmitComponent">
+                <description>CMS trip details form submit component</description>
+            </itemtype>
+
+            <itemtype code="CMSPropertyDetailsSubmitComponent" autocreate="true" generate="true"
+                      extends="CMSFormSubmitComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSPropertyDetailsSubmitComponent">
+                <description>CMS property details form submit component</description>
+            </itemtype>
+
+            <itemtype code="CMSContactExpertSubmitComponent" autocreate="true" generate="true" extends="YFormCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSContactExpertSubmitComponent">
+                <description>CMS contact expert form component</description>
+            </itemtype>
+
+
+           <itemtype code="CMSViewPoliciesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSViewPoliciesComponent">
+                <description>CMS View Policies component</description>
+				<attributes>
+					<attribute autocreate="true" qualifier="numberOfPoliciesToDisplay" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers read="true" write="true" search="true" optional="false" />
+					</attribute>
+				</attributes>
+            </itemtype>
+
+            <itemtype code="CMSViewQuotesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSViewQuotesComponent">
+                <description>CMS View Quotes component</description>
+                <attributes>
+                    <attribute autocreate="true" qualifier="numberOfQuotesToDisplay" type="java.lang.Integer">
+                        <persistence type="property" />
+                        <modifiers read="true" write="true" search="true" optional="false" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSLinkImageComponent" autocreate="true" generate="true" extends="CMSLinkComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSLinkImageComponent">
+                <description>CMS link holder component provides access of the attribute to the model/view</description>
+                <attributes>
+                    <attribute qualifier="image" type="CMSImageComponent">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Image to display for the link</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSAllOurServicesComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSAllOurServicesComponent">
+                <description>CMS all out services category component</description>
+            </itemtype>
+            
+            <itemtype code="CMSRotatingImagesComponent" autocreate="true" generate="true" extends="RotatingImagesComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSAllOurServicesComponent">
+                <description>Extended to add image text</description>
+            </itemtype>
+            
+            <itemtype code="CMSAgentRootComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSAgentRootComponent">
+                <description>CMS all agent categories component</description>
+                <attributes>
+                    <attribute  type="java.lang.String" qualifier="agentRootCategory">
+                        <modifiers optional="false" />
+                        <persistence type="property" />
+                        <description>HTML element type for the child components</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="InsuranceJspIncludeComponent" autocreate="true" generate="true" extends="JspIncludeComponent"
+            		jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.InsuranceJspIncludeComponent">
+            	<description>Only overridden here so that we can reference jsps in our area in the add on</description>		
+            </itemtype>
+
+            <itemtype code="CMSCustomDefineStyleCMSComponentsContainer" generate="true" extends="AbstractCMSComponentContainer" autocreate="true"
+                      jaloclass="de.hybris.platform.financialacceleratorstorefront.jalo.components.CMSCustomDefineStyleCMSComponentsContainer">
+                <description>This is container used to define and assign style to child components.</description>
+                <attributes>
+                    <attribute  type="java.lang.String" qualifier="elementType">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>HTML element type for the child components</description>
+                    </attribute>
+                    <attribute  type="java.lang.String" qualifier="styleCss">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Style css classes for the child components</description>
+                    </attribute>
+                    <attribute  type="java.lang.String" qualifier="idKey">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Base Id key for generate unique ID keys for the child components</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="DynamicProgressBarStepsComponent" autocreate="true" generate="true" extends="SimpleCMSComponent"
+                      jaloclass="de.hybris.platform.acceleratorcms.jalo.components.DynamicProgressBarStepsComponent">
+                <description>It represents progress bar component that contains cms progress node.</description>
+                <attributes>
+                    <attribute type="java.lang.String" qualifier="styleAttributes">
+                        <persistence type="property"/>
+                        <modifiers/>
+                        <description>CSS style class of this bar component.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
+ 
+        </typegroup>
+
+  	</itemtypes>
+</items>

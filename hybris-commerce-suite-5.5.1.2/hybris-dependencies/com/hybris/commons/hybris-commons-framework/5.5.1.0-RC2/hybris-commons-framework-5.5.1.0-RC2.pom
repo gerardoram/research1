@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+		<relativePath />
+	</parent>
+
+	<artifactId>hybris-commons-framework</artifactId>
+	<version>5.5.1.0-RC2</version>
+
+	<name>hybris-commons-framework</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>hybris-commons-dto</module>
+		<module>hybris-commons-conversion</module>
+		<module>hybris-commons-archetype</module>
+		<module>hybris-commons-exporter</module>
+		<module>hybris-commons-client</module>
+	</modules>
+
+	<properties>
+			<!-- There is a compilation problem with the jersey references, we skip report generation it for now -->
+			<enunciate.skip>true</enunciate.skip>
+			
+			<hybris.kernel.version>5.5.1.0-RC2</hybris.kernel.version>
+			<hybris.commons.version>5.5.1.0-RC1</hybris.commons.version>
+			<jgiflow.version>1.0-m4.3</jgiflow.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:ssh://stash.hybris.com/oms/commons-framework.git</connection>
+		<developerConnection>scm:git:ssh://stash.hybris.com/oms/commons-framework.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>dranura-release</id>
+			<url>https://repository.hybris.com/dranura-release</url>
+		</repository>
+		<snapshotRepository>
+			<id>dranura-snapshot</id>
+			<url>https://repository.hybris.com/dranura-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	
+	
+	
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- Kernel -->
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-api</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-service</artifactId>
+				<version>${hybris.kernel.version}</version>
+			</dependency>
+			
+			<!-- hybris commons -->
+			<dependency>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-dto</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>${jgiflow.version}</version>
+				<configuration>
+					<flowInitContext>
+						<masterBranchName>master</masterBranchName>
+						<developBranchName>develop</developBranchName>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<versionTagPrefix>v</versionTagPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

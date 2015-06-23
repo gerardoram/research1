@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <plugins>
+    <plugin>
+      <name>hybris Maven Plugin</name>
+      <prefix>hybris</prefix>
+      <artifactId>hybris-maven-plugin</artifactId>
+    </plugin>
+    <plugin>
+      <name>FileAnalyzer</name>
+      <prefix>fileanalyzer</prefix>
+      <artifactId>fileanalyzer-maven-plugin</artifactId>
+    </plugin>
+    <plugin>
+      <name>SvnComparer</name>
+      <prefix>svncomparer</prefix>
+      <artifactId>svncomparer-maven-plugin</artifactId>
+    </plugin>
+    <plugin>
+      <name>hybris-versions-maven-plugin Maven Mojo</name>
+      <prefix>hybris-versions</prefix>
+      <artifactId>hybris-versions-maven-plugin</artifactId>
+    </plugin>
+    <plugin>
+      <name>[y] LicenseUpdater</name>
+      <prefix>hybrislicense</prefix>
+      <artifactId>hybrislicense-maven-plugin</artifactId>
+    </plugin>
+  </plugins>
+</metadata>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>order-management-system</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<packaging>pom</packaging>
+	<artifactId>order-management-ui</artifactId>
+	<name>order-management-ui</name>
+
+	<modules>
+		<module>oms-ui-api</module>
+		<module>oms-ui-facade</module>
+		<module>oms-ui-rest-client</module>
+		<module>oms-ui-rest-resources</module>
+		<module>oms-ui-service</module>
+	</modules>
+</project>

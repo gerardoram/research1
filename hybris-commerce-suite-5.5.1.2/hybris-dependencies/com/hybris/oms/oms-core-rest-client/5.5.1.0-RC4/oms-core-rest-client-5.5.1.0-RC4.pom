@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>oms-core</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.0-RC4</version>
+	</parent>
+
+	<artifactId>oms-core-rest-client</artifactId>
+	<name>oms-core-rest-client</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+	
+		<!-- OMS-Core dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-api</artifactId>
+		</dependency>
+		
+		<!-- Commons dependencies -->
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-rest-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-tenant-rest-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-mock</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-tenant</artifactId>
+		</dependency>
+		
+		<!-- Init-App dependencies -->
+		<dependency>
+		     <groupId>com.hybris.kernel</groupId>
+		     <artifactId>init-app-rest-client</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

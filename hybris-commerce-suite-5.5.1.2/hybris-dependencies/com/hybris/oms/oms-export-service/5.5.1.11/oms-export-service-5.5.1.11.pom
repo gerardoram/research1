@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>order-management-export</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>oms-export-service</artifactId>
+	<name>oms-export-service</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-export-api</artifactId>
+		</dependency>
+
+		<!-- OMS-Core -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-service</artifactId>
+			<classifier>sdk</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-core-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Tests -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-service</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

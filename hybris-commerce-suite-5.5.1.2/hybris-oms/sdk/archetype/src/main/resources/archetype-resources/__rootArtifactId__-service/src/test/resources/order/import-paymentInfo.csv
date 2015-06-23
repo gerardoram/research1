@@ -1,0 +1,8 @@
+authUrl,myOrder,billingAddress.cityName,billingAddress.countrySubentity,billingAddress.postalZone,billingAddress.latitudeValue,billingAddress.longitudeValue,billingAddress.countryIso3166Alpha2Code,paymentInfoType,version,paymentInfoId
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|1,Montreal,QC,h9wq3t,45.512303,-73.554431,CA,Visa,1,100
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|2,Montreal,QC,h9wq3t,45.512303,-73.554431,CA,Visa,1,102
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|3,Montreal,QC,h9wq3t,45.512303,-73.554431,CA,Visa,1,103
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|4,Montreal,QC,h9wq3t,45.512303,-73.554431,CA,Visa,1,104
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|8,Ottawa,QC,i9wq6t,45.512303,-73.554431,CA,Visa,1,105
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|19,Ottawa,QC,i9wq6t,45.512303,-73.554431,CA,Visa,1,106
+http://gateway.hybris.com/cisPaymentCybersource/psp/cisPaymentCybersource/authorizations/1WS4/3517152159420176056470,OrderData|10,Ottawa,QC,i9wq6t,45.512303,-73.554431,CA,Visa,1,107

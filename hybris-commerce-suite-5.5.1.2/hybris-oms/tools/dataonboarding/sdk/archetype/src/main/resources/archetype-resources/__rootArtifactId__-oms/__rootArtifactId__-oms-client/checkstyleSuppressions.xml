@@ -1,0 +1,48 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+  <!-- Suppressions for unit testing code -->
+  <suppress checks="MagicNumber"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="JavadocMethod"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="JavadocVariable"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="JavadocType"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="JavadocPackage"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="IllegalThrows"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="ThrowsCount"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="ImportControl"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="MultipleStringLiterals"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="ClassDataAbstractionCoupling"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="ClassFanOutComplexity"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+  <suppress checks="MethodCount"
+            files="[/${symbol_escape}${symbol_escape}]src[/${symbol_escape}${symbol_escape}]test[/${symbol_escape}${symbol_escape}]java[/${symbol_escape}${symbol_escape}]"
+            />
+</suppressions> 

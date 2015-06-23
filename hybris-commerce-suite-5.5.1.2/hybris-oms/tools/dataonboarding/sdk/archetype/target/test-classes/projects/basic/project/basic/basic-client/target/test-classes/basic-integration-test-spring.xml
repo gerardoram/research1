@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="classpath:/META-INF/dataonboarding-rest-client-spring.xml" />
+	<import resource="classpath:/META-INF/platform-initapp-rest-client-spring.xml" />
+
+	<import resource="classpath:/META-INF/hybris-commons-rest-client-spring.xml" />
+	<import resource="classpath:/META-INF/hybris-commons-configuration-spring.xml" />
+
+	<util:list id="dataonboardingRestCallDecorators">
+		<bean class="com.hybris.commons.client.StaticHeaderValueRestCallDecorator">
+			<property name="headerName" value="X-role"/>
+			<property name="staticValue" value="admin"/>
+		</bean>
+		<bean class="com.hybris.commons.client.StaticHeaderValueRestCallDecorator">
+			<property name="headerName" value="X-tenantId"/>
+			<property name="staticValue" value="single"/>
+		</bean>
+	</util:list>
+
+</beans>

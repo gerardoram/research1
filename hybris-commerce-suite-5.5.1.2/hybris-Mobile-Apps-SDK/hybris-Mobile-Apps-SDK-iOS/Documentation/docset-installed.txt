@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/winnieteichmann/Library/Developer/Shared/Documentation/DocSets/com.hybris.hybris-Accelerator-iOS-SDK.docset
+Time: 2013-03-26 20:39:46 +0000

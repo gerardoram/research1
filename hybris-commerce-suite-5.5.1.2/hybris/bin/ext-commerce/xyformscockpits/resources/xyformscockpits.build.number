@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 18 15:13:01 UTC 2015
+builddate=20150318 1512
+description=xyformscockpits
+name=xyformscockpits
+releasedate=20150311 1421
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

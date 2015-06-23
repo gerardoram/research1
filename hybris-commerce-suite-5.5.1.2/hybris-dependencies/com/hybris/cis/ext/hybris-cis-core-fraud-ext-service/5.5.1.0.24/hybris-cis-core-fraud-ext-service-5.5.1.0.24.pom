@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hybris.cis.ext</groupId>
+		<artifactId>hybris-cis-core-fraud-ext</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-core-fraud-ext-service</artifactId>
+	<packaging>jar</packaging>
+	<dependencies>
+        <dependency>
+            <groupId>com.hybris.cis</groupId>
+            <artifactId>hybris-cis-api-shared</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.cis</groupId>
+            <artifactId>hybris-cis-api-fraud</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-common</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>com.hybris.cis</groupId>
+            <artifactId>hybris-cis-common</artifactId>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-facade</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-persistence-label</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

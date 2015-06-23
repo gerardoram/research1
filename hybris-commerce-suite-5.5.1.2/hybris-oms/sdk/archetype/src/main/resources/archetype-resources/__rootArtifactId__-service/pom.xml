@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>${rootArtifactId}</artifactId>
+		<groupId>${groupId}</groupId>
+		<version>${version}</version>
+	</parent>
+
+	<artifactId>${artifactId}</artifactId>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-service</artifactId>
+			<classifier>sdk</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-domain-objects</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-facade</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-domain-objects</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-service</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-export-service</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-domain-objects</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-service</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-export-facade</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-domain-objects</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-export-service</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-ui-service</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-service</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-ui-facade</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-ui-service</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-ui-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-api</artifactId>
+			<version>${version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-codegenerator</artifactId>
+				<version>${hybris.kernel.version}</version>
+				<configuration>
+					<searchForDomainInClasspath>true</searchForDomainInClasspath>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generatemodels</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generatemodels</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/kernel/**</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.kernel</groupId>
+										<artifactId>kernel-codegenerator</artifactId>
+										<versionRange>[${hybris.kernel.version},)</versionRange>
+										<goals>
+											<goal>generatemodels</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- <repositories> -->
+	<!-- <repository> -->
+	<!-- <id>Alfresco Maven Repository</id> -->
+	<!-- <url>https://maven.alfresco.com/nexus/content/groups/public/</url> -->
+	<!-- </repository> -->
+	<!-- </repositories> -->
+
+</project>

@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Mar 05 13:57:22 CET 2015
+builddate=20150305 1357
+description=assistedservicefacades
+name=assistedservicefacades
+releasedate=20150224 1105
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

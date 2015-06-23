@@ -1,0 +1,153 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>order-management-api</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>oms-domain-objects</artifactId>
+	<name>oms-domain-objects</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-api</artifactId>
+			<classifier>sdk</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>dto-generator</artifactId>
+				<version>${hybris.kernel.version}</version>
+				<executions>
+					<execution>
+						<id>dto</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>dto</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classifier>${envClassifier}</classifier>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>sdk</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>sdk</classifier>
+							<excludes>
+								<exclude>**/commons/dto/EntityDto*.class</exclude>
+								<exclude>**/commons/dto/impl/**</exclude>
+								<exclude>**/oms/api/inventory/**</exclude>
+								<exclude>**/domain/address/Address.class</exclude>
+								<exclude>**/domain/address/Address$*.class</exclude>
+								<exclude>**/domain/ats/AtsFormula.class</exclude>
+								<exclude>**/domain/ats/AtsFormula$*.class</exclude>
+								<exclude>**/domain/ats/AtsLocalQuantities.class</exclude>
+								<exclude>**/domain/ats/AtsLocalQuantities$*.class</exclude>
+								<exclude>**/domain/ats/AtsQuantities.class</exclude>
+								<exclude>**/domain/ats/AtsQuantities$*.class</exclude>
+								<exclude>**/domain/ats/AtsQuantity.class</exclude>
+								<exclude>**/domain/ats/AtsQuantity$*.class</exclude>
+								<exclude>**/domain/basestore/BaseStore.class</exclude>
+								<exclude>**/domain/basestore/BaseStore$*.class</exclude>
+								<exclude>**/domain/inventory/Bin.class</exclude>
+								<exclude>**/domain/inventory/Bin$*.class</exclude>
+								<exclude>**/domain/inventory/BinSequencingEnum.class</exclude>
+								<exclude>**/domain/inventory/ItemStatus.class</exclude>
+								<exclude>**/domain/inventory/ItemStatus$*.class</exclude>
+								<exclude>**/domain/inventory/Location.class</exclude>
+								<exclude>**/domain/inventory/Location$*.class</exclude>
+								<exclude>**/domain/order/Order.class</exclude>
+								<exclude>**/domain/order/Order$*.class</exclude>
+								<exclude>**/domain/order/OrderLine.class</exclude>
+								<exclude>**/domain/order/OrderLine$*.class</exclude>
+								<exclude>**/domain/order/OrderLineAttribute.class</exclude>
+								<exclude>**/domain/order/OrderLineAttribute$*.class</exclude>
+								<exclude>**/domain/order/OrderLineQuantity.class</exclude>
+								<exclude>**/domain/order/OrderLineQuantity$*.class</exclude>
+								<exclude>**/domain/order/OrderLineQuantityStatus.class</exclude>
+								<exclude>**/domain/order/OrderLineQuantityStatus$*.class</exclude>
+								<exclude>**/domain/order/PaymentInfo.class</exclude>
+								<exclude>**/domain/order/PaymentInfo$*.class</exclude>
+								<exclude>**/domain/returns/Return.class</exclude>
+								<exclude>**/domain/returns/Return$*.class</exclude>
+								<exclude>**/domain/returns/ReturnLineRejection.class</exclude>
+								<exclude>**/domain/returns/ReturnLineRejection$*.class</exclude>
+								<exclude>**/domain/returns/ReturnOrderLine.class</exclude>
+								<exclude>**/domain/returns/ReturnOrderLine$*.class</exclude>
+								<exclude>**/domain/returns/ReturnPaymentInfo.class</exclude>
+								<exclude>**/domain/returns/ReturnPaymentInfo$*.class</exclude>
+								<exclude>**/domain/returns/ReturnQuerySupport.class</exclude>
+								<exclude>**/domain/returns/ReturnReview.class</exclude>
+								<exclude>**/domain/returns/ReturnReview$*.class</exclude>
+								<exclude>**/domain/returns/ReturnShipment.class</exclude>
+								<exclude>**/domain/returns/ReturnShipment$*.class</exclude>
+								<exclude>**/domain/returns/ReviewReason.class</exclude>
+								<exclude>**/domain/shipping/Delivery.class</exclude>
+								<exclude>**/domain/shipping/Delivery$*.class</exclude>
+								<exclude>**/domain/shipping/Shipment.class</exclude>
+								<exclude>**/domain/shipping/Shipment$*.class</exclude>
+								<exclude>**/domain/shipping/ShipmentDetails.class</exclude>
+								<exclude>**/domain/shipping/ShipmentDetails$*.class</exclude>
+								<exclude>**/domain/shipping/ShipmentQuerySupport.class</exclude>
+								<exclude>**/domain/shipping/ShipmentSplitResult.class</exclude>
+								<exclude>**/domain/shipping/ShipmentSplitResult$*.class</exclude>
+								<exclude>**/domain/shipping/ShippingAndHandling.class</exclude>
+								<exclude>**/domain/shipping/ShippingAndHandling$*.class</exclude>
+								<exclude>**/domain/types/Amount.class</exclude>
+								<exclude>**/domain/types/Amount$*.class</exclude>
+								<exclude>**/domain/types/Contact.class</exclude>
+								<exclude>**/domain/types/Contact$*.class</exclude>
+								<exclude>**/domain/types/Measure.class</exclude>
+								<exclude>**/domain/types/Measure$*.class</exclude>
+								<exclude>**/domain/types/Price.class</exclude>
+								<exclude>**/domain/types/Price$*.class</exclude>
+								<exclude>**/domain/types/Quantity.class</exclude>
+								<exclude>**/domain/types/Quantity$*.class</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

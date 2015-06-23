@@ -1,0 +1,81 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+ 	<context:annotation-config/>
+
+ 	<bean id="map2FormulaTransformer" class="${package}.oms.formula.Map2FormulaTransformer">
+		<property name="map2PojoTransformer" ref="schemalessTransformer"/>
+	</bean>
+
+	<bean id="formulaInsertEndpointAdapter" class="${package}.oms.formula.FormulaInsertEndpointAdapter">
+	</bean>
+
+	<camelContext id="dataonboarding.formulaInsert" xmlns="http://camel.apache.org/schema/spring"
+                  depends-on="dataonboarding">
+        <endpoint id="dataonboarding.csv.formula.insert.scanDir"
+                  uri="file://${symbol_dollar}{dataonboarding.inputDirectory}?delay=${symbol_dollar}{dataonboarding.formula.delay}&amp;antInclude=*/formulaInsert/*.${symbol_dollar}{dataonboarding.fileextension.csv:csv}&amp;${symbol_dollar}{dataonboarding.scan.common.opts}"/>
+
+        <route id="dataonboarding.csv.formula.insert.scanRoute">
+            <from ref="dataonboarding.csv.formula.insert.scanDir"/>
+            <to uri="context:dataonboarding:csv"/>
+        </route>
+
+        <route id="dataonboarding.formulaInsertDomainRoute"
+               errorHandlerRef="sliceErrorHandler">
+            <from uri="direct:dataonboarding.formulaInsert"/>
+            <bean ref="map2FormulaTransformer"/>
+            <bean ref="formulaInsertEndpointAdapter"/>
+        </route>
+    </camelContext>
+
+	<bean id="formulaUpdateEndpointAdapter" class="${package}.oms.formula.FormulaUpdateEndpointAdapter">
+	</bean>
+
+	<camelContext id="dataonboarding.formulaUpdate" xmlns="http://camel.apache.org/schema/spring"
+                  depends-on="dataonboarding">
+        <endpoint id="dataonboarding.csv.formula.update.scanDir"
+                  uri="file://${symbol_dollar}{dataonboarding.inputDirectory}?delay=${symbol_dollar}{dataonboarding.formula.delay}&amp;antInclude=*/formulaUpdate/*.${symbol_dollar}{dataonboarding.fileextension.csv:csv}&amp;${symbol_dollar}{dataonboarding.scan.common.opts}"/>
+
+        <route id="dataonboarding.csv.formula.update.scanRoute">
+            <from ref="dataonboarding.csv.formula.update.scanDir"/>
+            <to uri="context:dataonboarding:csv"/>
+        </route>
+
+        <route id="dataonboarding.formulaUpdateDomainRoute"
+               errorHandlerRef="sliceErrorHandler">
+            <from uri="direct:dataonboarding.formulaUpdate"/>
+            <bean ref="map2FormulaTransformer"/>
+            <bean ref="formulaUpdateEndpointAdapter"/>
+        </route>
+    </camelContext>
+
+    <bean id="formulaDeleteEndpointAdapter" class="${package}.oms.formula.FormulaDeleteEndpointAdapter">
+	</bean>
+
+	<camelContext id="dataonboarding.formulaDelete" xmlns="http://camel.apache.org/schema/spring"
+                  depends-on="dataonboarding">
+        <endpoint id="dataonboarding.csv.formula.delete.scanDir"
+                  uri="file://${symbol_dollar}{dataonboarding.inputDirectory}?delay=${symbol_dollar}{dataonboarding.formula.delay}&amp;antInclude=*/formulaDelete/*.${symbol_dollar}{dataonboarding.fileextension.csv:csv}&amp;${symbol_dollar}{dataonboarding.scan.common.opts}"/>
+
+        <route id="dataonboarding.csv.formula.delete.scanRoute">
+            <from ref="dataonboarding.csv.formula.delete.scanDir"/>
+            <to uri="context:dataonboarding:csv"/>
+        </route>
+
+        <route id="dataonboarding.formulaDeleteDomainRoute"
+               errorHandlerRef="sliceErrorHandler">
+            <from uri="direct:dataonboarding.formulaDelete"/>
+            <bean ref="map2FormulaTransformer"/>
+            <bean ref="formulaDeleteEndpointAdapter"/>
+        </route>
+    </camelContext>
+</beans>

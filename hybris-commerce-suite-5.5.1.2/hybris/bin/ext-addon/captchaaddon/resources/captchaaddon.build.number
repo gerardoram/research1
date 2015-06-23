@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Mar 12 04:14:28 CET 2015
+builddate=20150312 0414
+description=captchaaddon
+name=captchaaddon
+releasedate=20150311 1421
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

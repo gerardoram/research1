@@ -1,0 +1,4 @@
+id,description,orderLine,attributeId
+OrderLineAttributeData|1,color,OrderLineData|3,attribute1
+OrderLineAttributeData|2,size,OrderLineData|3,attribute2
+OrderLineAttributeData|3,style,OrderLineData|3,attribute3

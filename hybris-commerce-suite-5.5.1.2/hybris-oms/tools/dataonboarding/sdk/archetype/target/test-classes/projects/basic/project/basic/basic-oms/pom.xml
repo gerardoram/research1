@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>archetype.it</groupId>
+        <artifactId>basic</artifactId>
+		<version>0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>basic-oms</artifactId>
+    <name>dataonboarding-ext-oms</name>
+    
+    <packaging>pom</packaging>
+
+    <dependencies>
+    
+    	<dependency>
+            <groupId>archetype.it</groupId>
+            <artifactId>basic-test-configuration</artifactId>
+            <version>0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        
+    	<!-- dataonboarding dependencies -->
+    	    
+        <dependency>
+            <groupId>com.hybris.dataonboarding</groupId>
+            <artifactId>dataonboarding-framework</artifactId>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+  <modules>
+    <module>basic-oms-location</module>
+    <module>basic-oms-inventory</module>
+    <module>basic-oms-bin</module>
+    <module>basic-oms-formula</module>
+    <module>basic-oms-basestore</module>
+    <module>basic-oms-client</module>
+  </modules>
+</project>

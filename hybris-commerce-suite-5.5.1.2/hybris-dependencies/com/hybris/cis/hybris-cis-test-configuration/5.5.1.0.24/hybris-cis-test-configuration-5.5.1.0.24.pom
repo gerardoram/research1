@@ -1,0 +1,138 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-project</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-test-configuration</artifactId>
+	<name>hybris-cis-test-configuration</name>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--skip deploy (this is just a deploy module) -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<configuration>
+						<skip>false</skip>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copyProperties</id>
+							<phase>install</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<target>
+							<echo>Copying deploy folder</echo>
+							<scp todir="${ssh.username}:${ssh.password}@${deploy.host}:${ssh.folder}" trust="true" failonerror="true">
+								<fileset dir="${project.basedir}/deploy/${properties.folder}" />
+							</scp>
+							<echo>Finished copying</echo>
+						</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.cargo</groupId>
+					<artifactId>cargo-maven2-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>undeployFromTomcat</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>undeploy</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>deployToTomcat</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>deploy</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<container>
+							<containerId>tomcat7x</containerId>
+							<type>remote</type>
+						</container>
+						<configuration>
+							<type>runtime</type>
+							<properties>
+								<cargo.hostname>${deploy.host}</cargo.hostname>
+								<cargo.servlet.port>${deploy.port}</cargo.servlet.port>
+								<cargo.remote.username>admin</cargo.remote.username>
+								<cargo.remote.password>nimda</cargo.remote.password>
+							</properties>
+						</configuration>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>performance</id>
+			<properties>
+				<deploy.host>intci-pt-oms-1.yrdanura.fra.hybris.com</deploy.host>
+				<deploy.port>8080</deploy.port>
+				<ssh.username>hybris</ssh.username>
+				<ssh.password>Gehasu49</ssh.password>
+				<ssh.folder>/usr/share/tomcat7/lib</ssh.folder>
+				<properties.folder>ci-performance</properties.folder>
+			</properties>
+
+			<dependencies>
+				<dependency> 
+						<groupId>com.hybris.cis</groupId>
+						<artifactId>hybris-cis-geolocation-web</artifactId>
+						<version>${artifacts.version}</version>
+						<type>war</type>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.cargo</groupId>
+						<artifactId>cargo-maven2-plugin</artifactId>
+						
+						<configuration>
+							<deployer>
+								<type>remote</type>
+								<deployables>
+									<deployable>
+										<groupId>com.hybris.cis</groupId>
+										<artifactId>hybris-cis-geolocation-web</artifactId>
+										<type>war</type>
+										<pingURL>http://${deploy.host}:${deploy.port}/hybris-cis-geolocation-web/status</pingURL>
+										<pingTimeout>120000</pingTimeout>
+										<properties>
+											<context>hybris-cis-geolocation-web</context>
+										</properties>
+									</deployable>
+								</deployables>
+							</deployer>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

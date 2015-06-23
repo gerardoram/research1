@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>oms-core</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.0-RC4</version>
+	</parent>
+
+	<artifactId>oms-core-api</artifactId>
+	<name>oms-core-api</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<!-- Commons-Lang used for DTO Generator -->
+		<dependency>
+		   <groupId>org.apache.commons</groupId>
+		   <artifactId>commons-lang3</artifactId>
+		</dependency> 
+		
+		<!-- Kernel-API for extensions -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-api</artifactId>
+		</dependency>
+		
+		<!-- Init-App-API for extensions -->
+		<dependency>
+		     <groupId>com.hybris.kernel</groupId>
+		     <artifactId>init-app-api</artifactId>
+		</dependency>
+		
+	</dependencies>
+		
+	<build>
+		<plugins>
+			<plugin>
+			    <groupId>com.hybris.kernel</groupId>
+			    <artifactId>dto-generator</artifactId>
+			    <version>${hybris.kernel.version}</version>
+			    <executions>
+			        <execution>
+			            <id>dto</id>
+			            <phase>generate-sources</phase>
+			            <goals>
+			                <goal>dto</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+		          <classifier>${envClassifier}</classifier>
+		        </configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+					
+					<execution>
+						<id>sdk</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>sdk</classifier>
+							<excludes>
+								<exclude>**/commons/dto/EntityDto*.class</exclude>
+								<exclude>**/commons/dto/impl/**</exclude>
+								<exclude>**/domain/address/Address.class</exclude>
+								<exclude>**/domain/address/Address$*.class</exclude>
+								<exclude>**/domain/types/Amount.class</exclude>
+								<exclude>**/domain/types/Amount$*.class</exclude>
+								<exclude>**/domain/types/Contact.class</exclude>
+								<exclude>**/domain/types/Contact$*.class</exclude>
+								<exclude>**/domain/types/Measure.class</exclude>
+								<exclude>**/domain/types/Measure$*.class</exclude>
+								<exclude>**/domain/types/Price.class</exclude>
+								<exclude>**/domain/types/Price$*.class</exclude>
+								<exclude>**/domain/types/Quantity.class</exclude>
+								<exclude>**/domain/types/Quantity$*.class</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

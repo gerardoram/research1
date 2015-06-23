@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: it.pkg.oms.formula.FormulaUpdateEndpointAdapterTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec - in it.pkg.oms.formula.FormulaUpdateEndpointAdapterTest

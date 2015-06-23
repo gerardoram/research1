@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath:/dataonboarding-framework-spring-test.xml"/>
+
+    <import resource="classpath:/META-INF/dataonboarding-oms-basestore-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-basestore-spring.xml"/>
+    <import resource="classpath:/META-INF/dataonboarding-oms-bin-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-bin-spring.xml"/>
+    <import resource="classpath:/META-INF/dataonboarding-oms-inventory-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-inventory-spring.xml"/>
+    <import resource="classpath:/META-INF/dataonboarding-oms-location-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-location-spring.xml"/>
+    <import resource="classpath:/META-INF/basic-oms-formula-spring.xml"/>
+
+    <bean id="baseStoreInsertEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="baseStoreUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+
+    <bean id="binsInsertEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="binsUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="binsDeleteEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+
+	<bean id="inventoryInsertEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="inventoryInsertUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="inventoryUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="inventoryDeleteEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="inventoryCustomEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+
+	<bean id="locationInsertEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="locationInsertUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+    <bean id="locationUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+
+	<bean id="formulaInsertEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+	<bean id="formulaUpdateEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+	<bean id="formulaDeleteEndpointAdapter" class="com.hybris.dataonboarding.framework.processor.DummyEndpoint"/>
+</beans>

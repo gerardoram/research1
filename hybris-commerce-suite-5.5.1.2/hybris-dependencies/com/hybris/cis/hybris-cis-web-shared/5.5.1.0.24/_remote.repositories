@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Thu Mar 26 09:12:22 UTC 2015
+hybris-cis-web-shared-5.5.1.0.24.pom>=
+hybris-cis-web-shared-5.5.1.0.24-tests.jar>=
+hybris-cis-web-shared-5.5.1.0.24.jar>=

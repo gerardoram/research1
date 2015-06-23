@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.oms</groupId>
+		<artifactId>order-management-system-project</artifactId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<groupId>com.hybris.oms.ext</groupId>
+	<artifactId>oms-ext</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>oms-ext-api</module>
+		<module>oms-ext-client</module>
+		<module>oms-ext-service</module>
+		<module>oms-ext-web</module>
+		<module>oms-ext-integration-test</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<!-- @yremovefrom -->
+			<!-- This section will be removed from the generated archetype -->
+			<!-- It is only avoid generation of site documentation -->
+			<plugin>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-archetype</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin>
+			<!-- @yremoveto -->
+		</plugins>
+	</build>
+
+</project>

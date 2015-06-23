@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>hybris-commons-utils</artifactId>
+		<version>5.5.1.0-RC1</version>
+	</parent>
+
+	<artifactId>hybris-commons-mock</artifactId>
+	<name>hybris-commons-mock</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-test-configuration</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+	        <groupId>com.hybris.commons</groupId>
+	        <artifactId>hybris-deps-spring</artifactId>
+	        <type>pom</type>
+	    </dependency>
+		
+		<dependency>
+	        <groupId>com.hybris.commons</groupId>
+	        <artifactId>hybris-commons-rest-client</artifactId>
+	        <version>${project.version}</version>
+	    </dependency>
+	    
+		<dependency>
+	        <groupId>com.google.guava</groupId>
+	        <artifactId>guava</artifactId>
+	    </dependency>
+	    <dependency>
+		    <groupId>de.dev-eth0.dummycreator</groupId>
+			<artifactId>dummy-creator</artifactId>
+			<version>1.2</version>
+		</dependency>
+	    <dependency>
+		    <groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+		</dependency>
+	</dependencies>
+</project>

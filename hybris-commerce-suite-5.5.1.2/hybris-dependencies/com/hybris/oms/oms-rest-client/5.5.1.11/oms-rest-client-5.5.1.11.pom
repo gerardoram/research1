@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>order-management-api</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>oms-rest-client</artifactId>
+
+	<dependencies>
+		<!-- OMS-Core dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-rest-client</artifactId>
+		</dependency>
+
+		<!-- OMS dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-service</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-domain-objects</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+					<minimizeJar>true</minimizeJar>
+					<artifactSet>
+						<includes>
+							<include>com.hybris.commons:hybris-commons-rest-client</include>
+							<include>com.hybris.oms:oms-core-rest-client</include>
+							<include>com.hybris.oms:oms-api</include>
+							<include>com.sun.jersey:*</include>
+						</includes>
+					</artifactSet>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>dist-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attached</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/dist.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>qa</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>copy-dependencies</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
+									<includeGroupIds>com.hybris</includeGroupIds>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-aspects</artifactId>
+  <version>4.1.5.RELEASE</version>
+  <versioning>
+    <latest>4.1.5.RELEASE</latest>
+    <release>4.1.5.RELEASE</release>
+    <versions>
+      <version>4.1.5.RELEASE</version>
+    </versions>
+    <lastUpdated>20150325173818</lastUpdated>
+  </versioning>
+</metadata>

@@ -1,0 +1,57 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:/META-INF/oms-service-all-spring.xml" />
+	<import resource="classpath:/META-INF/oms-facade-conversion-spring.xml"/>
+
+	<alias name="defaultDummyObjectService" alias="dummyObjectService" />
+	<bean id="defaultDummyObjectService" class="${package}.services.impl.DefaultDummyObjectService">
+		<property name="orderQueries" ref="orderQueryFactory" />
+	</bean>
+
+	<alias name="defaultDummyObjectFacade" alias="dummyObjectFacade" />
+	<bean id="defaultDummyObjectFacade" class="${package}.facades.DefaultDummyObjectFacade">
+		<property name="dummyObjectService" ref="dummyObjectService" />
+		<property name="orderConverter" ref="orderConverter" />
+		<property name="dummyObjectModelToDataConverter" ref="dummyObjectModelToDataConverter" />
+		<property name="dummyObjectDataToModelConverter" ref="dummyObjectDataToModelConverter" />
+		<property name="converters" ref="converters" />
+	</bean>
+
+	<alias name="propertyAwareDummyObjectModelToDataPopulator" alias="dummyObjectModelToDataPopulator" />
+	<bean id="propertyAwareDummyObjectModelToDataPopulator" parent="compositePopulator">
+		<property name="populators">
+			<list>
+				<ref bean="defaultDummyObjectModelToDataPopulator" />
+				<ref bean="propertyAwareReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="defaultDummyObjectModelToDataPopulator"
+			class="${package}.conversion.dummy.DummyObjectModelToDataPopulator"/>
+
+	<bean id="dummyObjectModelToDataConverter" class="${package}.conversion.dummy.DummyObjectModelToDataConverter">
+		<property name="dummyObjectService" ref="dummyObjectService" />
+		<property name="populator" ref="dummyObjectModelToDataPopulator"/>
+	</bean>
+
+	<alias name="propertyAwareDummyObjectDataToModelPopulator" alias="dummyObjectDataToModelPopulator" />
+	<bean id="propertyAwareDummyObjectDataToModelPopulator" parent="compositePopulator">
+		<property name="populators">
+			<list>
+				<ref bean="defaultDummyObjectDataToModelPopulator" />
+				<ref bean="propertyAwarePopulator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="defaultDummyObjectDataToModelPopulator"
+			class="${package}.conversion.dummy.DummyObjectDataToModelPopulator"/>
+
+	<bean id="dummyObjectDataToModelConverter" class="${package}.conversion.dummy.DummyObjectDataToModelConverter">
+		<property name="populator" ref="dummyObjectDataToModelPopulator"/>
+	</bean>
+</beans>

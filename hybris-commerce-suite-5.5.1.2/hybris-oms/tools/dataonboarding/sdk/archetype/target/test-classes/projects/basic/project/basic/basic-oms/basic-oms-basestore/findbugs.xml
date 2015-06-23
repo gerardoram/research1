@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ++++++++++++++++++++++++++++++++++++++ -->
+<!-- +++++ findbugs filter definition +++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++ -->
+<!-- see documentation at 
+    http://findbugs.sourceforge.net/manual/filter.html -->
+<FindBugsFilter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="https://findbugs.googlecode.com/svn/trunk/findbugs/etc/bugcollection.xsd">
+    <!-- do not report EI_EXPOSE_REP for java.util.Date -->
+    <Match>
+        <Bug code="EI,EI2" />
+		<Priority value="2" />
+    </Match>
+</FindBugsFilter>

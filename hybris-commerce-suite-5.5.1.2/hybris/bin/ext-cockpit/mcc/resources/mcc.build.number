@@ -1,0 +1,9 @@
+#Ant properties
+#Tue Mar 24 15:44:46 CET 2015
+builddate=20150324 1544
+description=mcc
+name=mcc
+releasedate=20150307 1800
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

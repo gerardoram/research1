@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-rest-client</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-geolocation-rest-client</artifactId>
+	<name>hybris-cis-geolocation-rest-client</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- modules -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-rest-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-geolocation</artifactId>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-web-geolocation</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.hybris.cis</groupId>
+		    <artifactId>hybris-cis-rest-common</artifactId>
+		    <version>${project.version}</version>
+		    <classifier>tests</classifier>
+		    <scope>test</scope>
+		</dependency>
+</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+<!--
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>dist-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attached</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/dist.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hybris.cis.ext</groupId>
+  <artifactId>hybris-cis-core-tax-ext-archetype</artifactId>
+  <version>5.5.1.0.24</version>
+  <packaging>maven-archetype</packaging>
+
+  <name>hybris-cis-core-tax-ext-archetype</name>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.archetype</groupId>
+        <artifactId>archetype-packaging</artifactId>
+        <version>2.2</version>
+      </extension>
+    </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-archetype-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <description>Base superpom for dranura projects defining dranura specific distribution management</description>
+
+  <scm>
+    <connection>scm:git:ssh://stash.hybris.com/cis/cis.git/hybris-cis-archetypes/hybris-cis-core-tax-ext</connection>
+    <developerConnection>scm:git:ssh://stash.hybris.com/cis/cis.git/hybris-cis-archetypes/hybris-cis-core-tax-ext</developerConnection>
+  </scm>
+</project>

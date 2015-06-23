@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 25 19:48:47 CET 2015
+builddate=20150325 1948
+description=cistax
+name=cistax
+releasedate=20150316 1401
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

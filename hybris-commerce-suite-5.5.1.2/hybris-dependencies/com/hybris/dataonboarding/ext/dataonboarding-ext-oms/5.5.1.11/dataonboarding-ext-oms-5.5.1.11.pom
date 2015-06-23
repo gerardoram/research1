@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hybris.dataonboarding.ext</groupId>
+        <artifactId>dataonboarding-ext</artifactId>
+		<version>5.5.1.11</version>
+    </parent>
+
+    <artifactId>dataonboarding-ext-oms</artifactId>
+    <name>dataonboarding-ext-oms</name>
+    
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dataonboarding-ext-oms-location</module>
+        <module>dataonboarding-ext-oms-inventory</module>
+        <module>dataonboarding-ext-oms-bin</module>
+        <module>dataonboarding-ext-oms-formula</module>
+        <module>dataonboarding-ext-oms-basestore</module>
+        <module>dataonboarding-ext-oms-client</module>
+    </modules>
+
+    <dependencies>
+    
+    	<dependency>
+            <groupId>com.hybris.dataonboarding.ext</groupId>
+            <artifactId>dataonboarding-ext-test-configuration</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+    	<!-- dataonboarding dependencies -->
+    	    
+        <dependency>
+            <groupId>com.hybris.dataonboarding</groupId>
+            <artifactId>dataonboarding-framework</artifactId>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+</project>

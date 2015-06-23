@@ -1,0 +1,9 @@
+#Ant properties
+#Mon Mar 09 22:20:04 CET 2015
+builddate=20150309 2220
+description=cockpit
+name=cockpit
+releasedate=20150307 1800
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

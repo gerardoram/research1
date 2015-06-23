@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Mar 12 10:39:50 CET 2015
+builddate=20150312 1039
+description=commerceservicesatddtests
+name=commerceservicesatddtests
+releasedate=20150311 1157
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

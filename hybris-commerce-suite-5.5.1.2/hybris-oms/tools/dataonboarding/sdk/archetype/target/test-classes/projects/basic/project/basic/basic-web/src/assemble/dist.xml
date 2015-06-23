@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>dist</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>false</unpack>
+            <excludes>
+                <!--
+                    the dist assembly is customized for the accelerator build now
+                    this means, all rest client common stuff is moved available from
+                    the hybris-common-rest-client distribution zip
+                -->
+                <exclude>com.hybris.commons:*</exclude>
+                <exclude>it.pkg:*</exclude>
+                <!-- exclude taglibs -->
+                <exclude>taglibs:*</exclude>
+                <!-- exclude spring stuff -->
+                <exclude>org.springframework:*</exclude>
+                <exclude>commons-logging:commons-logging</exclude>
+                <exclude>aopalliance:aopalliance</exclude>
+                <!-- excluded logging setup -->
+                <exclude>ch.qos.logback:*</exclude>
+                <exclude>org.slf4j:*</exclude>
+                <!-- exclude jersey stuff -->
+                <exclude>com.sun.jersey:*</exclude>
+                <exclude>com.sun.jersey.contribs:*</exclude>
+                <exclude>commons-codec:commons-codec</exclude>
+                <exclude>commons-lang:commons-lang</exclude>
+                <exclude>commons-httpclient:commons-httpclient</exclude>
+                <exclude>commons-io:commons-io</exclude>
+                <exclude>commons-collections:commons-collections</exclude>
+                <exclude>commons-configuration:commons-configuration</exclude>
+                <!-- exclude other junk -->
+                <exclude>com.google.code.findbugs:*</exclude>
+                <exclude>com.google.guava:*</exclude>
+                <exclude>javax.servlet:jstl</exclude>
+                <exclude>javax.validation:validation-api</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

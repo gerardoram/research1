@@ -1,0 +1,9 @@
+#Ant properties
+#Wed Mar 25 08:18:07 CET 2015
+builddate=20150325 0818
+description=entitlementservices
+name=entitlementservices
+releasedate=20150311 1157
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

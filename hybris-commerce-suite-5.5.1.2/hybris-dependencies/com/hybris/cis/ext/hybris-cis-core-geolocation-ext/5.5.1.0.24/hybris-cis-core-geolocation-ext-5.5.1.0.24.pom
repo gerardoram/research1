@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.cis.ext</groupId>
+		<artifactId>hybris-cis-archetypes</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-core-geolocation-ext</artifactId>
+	<packaging>pom</packaging>
+
+    <properties>
+        <com.hybris.cis.version>5.5.1.0.24</com.hybris.cis.version>
+    </properties>
+
+	<modules>
+		<module>hybris-cis-core-geolocation-ext-test-configuration</module>
+		<module>hybris-cis-core-geolocation-ext-api</module>
+		<module>hybris-cis-core-geolocation-ext-service</module>
+		<module>hybris-cis-core-geolocation-ext-web</module>
+		<module>hybris-cis-core-geolocation-ext-integration-test</module>
+  </modules>
+	<dependencyManagement>
+		<dependencies>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-api-shared</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-common</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-common</artifactId>
+                <version>${com.hybris.cis.version}</version>
+                <scope>test</scope>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-facade</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-shared</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-api-geolocation</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-persistence-geo</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-geolocation</artifactId>
+                <version>${com.hybris.cis.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>com.hybris.cis</groupId>
+				<artifactId>hybris-cis-geolocation-rest-client</artifactId>
+				<version>${com.hybris.cis.version}</version>
+				<scope>test</scope>
+			</dependency>
+        </dependencies>
+	</dependencyManagement>
+</project>

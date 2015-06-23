@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+		<relativePath />
+	</parent>
+
+	<groupId>com.hybris.cis</groupId>
+	<artifactId>hybris-cis-project</artifactId>
+	<version>5.5.1.0.24</version>
+	<packaging>pom</packaging>
+
+	<scm>
+        <connection>scm:git:ssh://stash.hybris.com/cis/cis.git</connection>
+        <developerConnection>scm:git:ssh://stash.hybris.com/cis/cis.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.hybris.commons</groupId>
+                <artifactId>hybris-commons-configuration</artifactId>
+                <version>5.5.1.0-RC1</version> <!-- this value is also defined in the property below com.hybris.commons.utils -->
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-avs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-fraud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-geolocation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-payment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-shipping</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-subscription</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-web-tax</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hybris.cis</groupId>
+                <artifactId>hybris-cis-geolocation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.19.0-GA</version>
+        </dependency>
+        <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-commons-configuration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ws.security</groupId>
+            <artifactId>wss4j</artifactId>
+            <version>1.6.17</version>
+        </dependency>
+    </dependencies>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>hybris-cis-test-configuration</module>
+				<module>hybris-cis-api</module>
+				<module>hybris-cis-server</module>
+				<module>hybris-cis-configurations</module>
+				<module>hybris-cis-client</module>
+                <module>hybris-cis-vendor</module>
+				<module>hybris-cis-integration-test</module>
+				<module>hybris-cis-all-web</module>          
+				<module>hybris-cis-archetypes</module>
+                <module>hybris-cis-trail</module>
+			</modules> 
+		</profile>
+		<profile>
+			<id>sbg</id>
+			<modules>
+				<module>hybris-cis-api</module>
+				<module>hybris-cis-server</module>
+				<module>hybris-cis-client</module>
+				<module>hybris-cis-vendor</module>      
+				<module>hybris-cis-archetypes</module>
+			</modules> 
+		</profile>
+
+
+		<profile>
+		  <id>doclint-java8-disable</id>
+			  <properties>
+				<additionalparam>-Xdoclint:none</additionalparam>
+			  </properties>
+		</profile>
+
+
+        <profile>
+            <id>hybris-repo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!-- For resolving of superpom -->
+            <repositories>
+                <repository>
+                    <id>hybris-repository</id>
+                    <url>https://repository.hybris.com/hybris-repository</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>hybris-repository</id>
+                    <url>https://repository.hybris.com/hybris-repository</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>daily</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+	</profiles>
+	
+	<properties>
+                <com.hybris.commons.deps>5.5.1.0-RC1</com.hybris.commons.deps>
+                <com.hybris.commons.utils>5.5.1.0-RC1</com.hybris.commons.utils>
+                <hybris.kernel.version>5.5.1.0-RC4</hybris.kernel.version>
+	            <com.hybris.commons.archetype>5.5.1.0-RC2</com.hybris.commons.archetype>
+                <enunciate.skip>true</enunciate.skip>
+		<skipProperties>true</skipProperties>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- @yremovefrom -->
+			<!-- This section will be removed from the generated archetype -->
+			<!-- It is only to build archetype automatically without any manual step -->
+			<!-- and not to deploy extension project to the repository -->
+			<plugin>
+				<groupId>com.hybris.commons</groupId>
+				<artifactId>hybris-commons-archetype</artifactId>
+				<configuration>
+					<filterArtifacts>hybris-cis-core-shipping-ext</filterArtifacts>
+					<packageName>com.hybris.cis.ext</packageName>
+					<ignoredFileList>**/hybris-cis-core-shipping-ext.iml,**/index.html,**/com.hybris.cis.core.shipping_cis-core-shipping-ext-web.properties</ignoredFileList>
+				</configuration>
+				<version>${com.hybris.commons.archetype}</version>
+                
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<skipDeploy>false</skipDeploy>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<!-- <skip>true</skip> -->
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.hybris.commons</groupId>
+                <artifactId>hybris-deps-property-report-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>hybris.properties</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>verify-defaults</goal>
+                            <goal>verify-templates</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+			<!-- @yremoveto -->
+		</plugins>
+	</build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>*accertify*:*avalara*:*canadapost*:*connectship*:*cybersource*:*ext*:*dummyvendor*:*fedex*:*kia*:*moneris*:*ups*:*usps*:*vertex*:*webtest*</excludePackageNames>
+                        
+                    </configuration>
+                    </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+                </plugins>
+            </reporting>
+</project>

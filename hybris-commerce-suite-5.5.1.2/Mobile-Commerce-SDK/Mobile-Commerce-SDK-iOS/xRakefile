@@ -1,0 +1,332 @@
+require 'yaml'
+require 'uri'
+require 'tempfile'
+require 'tmpdir'
+require 'fileutils'
+
+TESTFLIGHT_URL = 'http://testflightapp.com/api/builds.json'
+HOCKEYAPP_URL = 'https://rink.hockeyapp.net/api/2/apps/upload'
+
+BUILD_TOOL = 'xctool'
+# BUILD_TOOL = 'xcodebuild'
+
+PROJECT_DIR = File.join(File.dirname(__FILE__), 'hybrisMobileB2BApp')
+PROJECT_LIB1_DIR = File.join(File.dirname(__FILE__), 'hybrisMobileCommerceLibrary')
+PROJECT_LIB2_DIR = File.join(File.dirname(__FILE__), 'hybrisMobileLocationLibrary')
+BUILD_CONFIG_DIR = File.join(PROJECT_DIR, 'config')
+BUILDS_DIR = File.join(PROJECT_DIR, "build")
+PROVISIONING_PROFILES_DIR = File.join(BUILD_CONFIG_DIR, 'provisioning')
+PROXY_CMD_LINE = 'http_proxy=http://proxy:8080'
+# PROXY_CMD_LINE = ''
+
+@project = OpenStruct.new(YAML.load_file(File.join(BUILD_CONFIG_DIR, 'project.yml')))
+environments = YAML.load_file(File.join(BUILD_CONFIG_DIR, 'environments.yml'))
+environment = OpenStruct.new(environments[ENV['IOS_ENV'] || 'development'])
+
+@testflight_api_token =  @project.TESTFLIGHT_API_TOKEN
+@hockeyapp_api_team_token =  @project.hockeyapp_api_team_token
+
+task :environment, [:configuration, :sdk, :scheme, :profile, :device, :os_version, :reporter, :workspace] do |t, args|
+  args.with_defaults(
+      :workspace =>     ENV['IOS_WORKSPACE'] || environment.workspace,
+      :scheme =>        ENV['IOS_SCHEME'] || environment.scheme,
+      :sdk =>           ENV['IOS_SDK'] || environment.sdk,
+      :configuration => ENV['IOS_CONFIGURATION'] || environment.configuration,
+      :profile =>       ENV['IOS_PROVISIONING_PROFILE'] || environment.profile,
+      :device =>        ENV['IOS_DEVICE'] || environment.device,
+      :os_version =>    ENV['IOS_OS_VERSION'] || environment.os_version,
+      :sdkdir =>        ENV['IOS_SDK'] || environment.sdkdir,
+      :proxy =>         ENV['IOS_PROXY']  || environment.proxy,
+      :reporter =>      ENV['IOS_REPORTER'] || environment.reporter
+  )
+  @configuration = args.configuration
+  @workspace = args.workspace
+  @scheme = args.scheme
+  @profile = args.profile
+  @sdk = args.sdk
+  @device = args.device
+  @os_version = args.os_version
+  @sdkdir = args.sdkdir
+  @reporter = args.reporter
+  puts "**************** Configuration ****************"
+  puts "#{@configuration} #{@scheme} #{@profile} #{@sdk} #{@device} #{@os_version} #{@sdkdir} #{@reporter}"
+  puts "****************** Variables ******************"
+  puts "#{PROJECT_DIR} #{BUILD_CONFIG_DIR} #{BUILDS_DIR} #{PROVISIONING_PROFILES_DIR} #{PROXY_CMD_LINE}"
+end
+
+# Install
+namespace :install do
+  desc 'Installs xctool'
+  task :xctool do
+    # don't care if this fails on travis
+    sh("brew update") rescue nil
+    sh("brew install xctool") rescue nil
+  end
+
+  desc 'Installs bundler'
+  task :bundler do
+    sh "#{PROXY_CMD_LINE} gem install bundler"
+    sh "#{PROXY_CMD_LINE} gem update bundler"
+    sh "#{PROXY_CMD_LINE} gem install json -v '1.8.1'"
+  end
+
+  desc 'Installs rubygems needed in this project with bundler'
+  task :gems do
+    Dir.chdir(PROJECT_DIR) do
+      sh "bundle install"
+    end
+  end
+
+  desc 'Installs cocoapods needed in this project'
+  task :pods do
+    Dir.chdir(PROJECT_DIR) do
+      # sh "pod setup" --- asks pod setup
+      sh "pod install"
+    end
+    Dir.chdir(PROJECT_LIB1_DIR) do
+      Dir.chdir("Example") do
+        sh "pod install"
+      end
+    end
+  end
+
+end
+
+namespace :pod_cleaning do
+
+  desc 'Cleans the pods in the project'
+  task :clean_proj_pods => :environment do
+    Dir.chdir(PROJECT_DIR) do
+      sh "rm -f Podfile.lock"
+      sh "rm -rf Pods"
+    end
+  end
+
+  desc 'Cleans the pods in the libs'
+  task :clean_lib_pods => :environment do
+    Dir.chdir(PROJECT_LIB1_DIR) do
+      sh "rm -f Example/Podfile.lock"
+      sh "rm -rf Example/Pods"
+    end
+  end
+
+end
+
+desc 'Cleans all pods'
+task :clean_pods => [:'pod_cleaning:clean_proj_pods', :'pod_cleaning:clean_lib_pods']
+
+namespace :xcode do
+
+  desc 'List available sdks'
+  task :sdks do
+    system_or_exit(%q[xcodebuild -showsdks])
+  end
+
+  desc 'List available schemes'
+  task :schemes => :environment do
+    Dir.chdir(PROJECT_DIR) do
+      system_or_exit(%Q[xcodebuild -list -workspace #{@project.name}.xcworkspace])
+    end
+  end
+
+  desc 'List available devices'
+  task :devices do
+    system_or_exit(%Q[instruments -s devices])
+  end
+end
+
+
+# Building tasks
+namespace :project do
+
+  desc 'Cleans compiled application'
+  task :clean => :environment do
+    Dir.chdir(PROJECT_DIR) do
+      xcbuild('clean')
+    end
+  end
+
+  desc 'Cleans compiled Commerce Library'
+  task :cleancommlib do
+    Dir.chdir(PROJECT_LIB1_DIR) do
+      Dir.chdir("Example") do
+        xcbuild('clean', 'xcodebuild', Dir.pwd, "hybrisMobileCommerceLibrary", "hybrisMobileCommerceLibrary")
+      end
+    end
+  end
+
+  desc 'Build the application'
+  task :build => :environment do
+    Dir.chdir(PROJECT_DIR) do
+      xcbuild('build')
+    end
+  end
+
+  desc 'Build the -cal application'
+  task :buildcal do
+    environment = OpenStruct.new(environments['calabash'])
+    Rake::Task[:environment].invoke
+    # ENV['IOS_ENV'] = 'calabash'
+    # Rake::Task[:environment].invoke
+    xcbuild('build')
+  end
+
+  desc 'Build the CommerceLibrary'
+  task :buildCommLib do
+    environment = OpenStruct.new(environments['commlib'])
+    Rake::Task[:environment].invoke
+    Dir.chdir(PROJECT_LIB1_DIR) do
+      Dir.chdir("Example") do
+        xcbuild('build', BUILD_TOOL, Dir.pwd, "hybrisMobileCommerceLibrary", "hybrisMobileCommerceLibrary")
+      end
+    end
+  end
+
+  desc 'Runs the B2B App specs'
+  task :test => [:environment] do
+    xcbuild('test')
+  end
+
+  desc 'Runs the B2B Commerce Lib specs'
+  task :testCommLib do
+    environment = OpenStruct.new(environments['unittestB2BCL'])
+    Rake::Task[:environment].invoke
+    Dir.chdir(PROJECT_LIB1_DIR) do
+      Dir.chdir("Example") do
+        xcbuild('test', BUILD_TOOL, Dir.pwd)
+      end
+    end
+  end
+end
+
+
+desc 'Cleans project code (-> project:clean)'
+task :clean_B2BApp => :'project:clean'
+
+desc 'Cleans project code (-> project:cleancommlib)'
+task :clean_B2BCL => :'project:cleancommlib'
+
+desc 'Cleans project code'
+task :clean_project => [:clean_B2BApp, :clean_B2BCL ]
+
+desc 'Setup compiler (-> install:xctool)'
+task :setup_compiler => [:'install:xctool']
+
+desc 'Setup project (-> install:gems, -> install:pods)'
+task :setup_project => [:'install:bundler', :'install:gems', :'install:pods']
+
+desc 'Clean project, set up and build cal (-> project:clean, -> setup_project, -> project:buildcal)'
+task :setup_cala => [:'project:clean', :setup_project, :'project:buildcal']
+
+desc 'Unit test only (-> project:test)'
+task :test => :'project:test'
+
+# desc 'Build cal only (-> project:buildcal)'
+# task :buildcal => :'project:buildcal'
+
+desc 'Build Commerce Library (-> project:buildcommlib)'
+task :buildCL => :'project:buildCommLib'
+
+desc 'Build only (-> project:build)'
+task :build => :'project:build'
+
+desc 'Build and test (-> project:build and project:test)'
+task :buildtest => [:'project:build', :'project:test']
+
+desc 'Assume nothing is installed and build from scratch'
+task :all => [:clean_pods,
+              :setup_compiler,
+              :setup_project,
+              :clean_project,
+              :build,
+              :buildCL ]
+
+task :default => [:'project:build', :'project:test']
+
+def release_notes_file
+  notes = ENV['RELEASE_NOTES']
+
+  if notes.nil? || notes.empty?
+    notes_file = Tempfile.new(@project.name)
+    begin
+      notes_file.write('# Please Enter the Release Notes For This Deployment')
+      notes_file.rewind
+      notes_file.close
+      editor = ENV['IOS_RELEASE_EDITOR'] || ENV['EDITOR']
+      system_or_exit(%Q[#{editor} #{notes_file.path}])
+      notes_file.open
+      notes = File.read(notes_file.path)
+    ensure
+      notes_file.close
+      notes_file.unlink
+    end
+  end
+
+  notes.strip!
+
+  if notes.empty?
+    raise "Release notes are required"
+  end
+
+  notes_file = Tempfile.new(@project.name)
+  begin
+    notes_file.write notes
+    notes_file
+  ensure
+    notes_file.close
+  end
+end
+
+def build_dir(configuration, effective_platform_name)
+  File.join(BUILDS_DIR, [configuration, effective_platform_name].join('-'))
+end
+
+def built_app_location(configuration, effective_platform_name, application)
+  File.join(build_dir(configuration, effective_platform_name), "#{application}.app")
+end
+
+def system_or_exit(cmd, stdout = nil)
+  puts "Executing #{cmd}"
+  cmd += " >#{stdout}" if stdout
+  system(cmd) or raise "******** Build failed ********"
+end
+
+def output_file(target)
+  Dir.mkdir(BUILDS_DIR) unless File.exists?(BUILDS_DIR)
+  output_file = File.join(BUILDS_DIR, "#{target}.output")
+  puts "Output: #{output_file}"
+  output_file
+end
+
+def xcbuild(build_action = 'build', build_tool = BUILD_TOOL, dir = PROJECT_DIR, worksp = @workspace, scheme = @scheme)
+  # seems xctool doesn't clean the project the same way as xcodebuild, so rely on that
+  build_tool = 'xcodebuild' if build_action == 'clean'
+
+  puts "Building with scheme #{@scheme}"
+  output_file = [ @configuration, @sdk, build_action ].join('-')
+  xc_command = []
+  xc_command << %Q[#{build_tool} -workspace #{worksp}.xcworkspace]
+  xc_command << %Q[-scheme #{scheme}]
+  xc_command << %Q[-sdk #{@sdk}]
+  xc_command << %Q[-destination 'name=#{@device},OS=#{@os_version}'] unless (@device.to_s.empty? && @os_version.to_s.empty?)
+  xc_command << %Q[-configuration #{@configuration}]
+  xc_command << build_action
+  xc_command << %Q[-reporter #{@reporter}] unless @reporter.to_s.empty?
+  xc_command << %Q[SYMROOT=#{BUILDS_DIR}]
+
+  if !(@profile.nil? || @profile.empty?)
+    local_profiles_path = "#{ENV['HOME']}/Library/MobileDevice/Provisioning Profiles/"
+    if !Dir.exists?(local_profiles_path)
+      FileUtils.mkdir_p(local_profiles_path)
+    end
+    system_or_exit(%Q[cp "#{File.join(PROVISIONING_PROFILES_DIR, @profile)}.mobileprovision" local_profiles_path])
+    xc_command << %Q[CODE_SIGN_IDENTITY="#{@project.code_signing_identity}"]
+    xc_command << %Q("PROVISIONING_PROFILE[sdk=#{@sdk}*]"=#{@profile})
+  end
+
+  Dir.chdir(dir) do
+    puts dir
+    system_or_exit(xc_command.join(' '), output_file(output_file))
+  end
+end
+

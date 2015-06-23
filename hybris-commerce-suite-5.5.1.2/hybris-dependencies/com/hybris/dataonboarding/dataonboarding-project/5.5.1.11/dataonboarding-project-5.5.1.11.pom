@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.commons</groupId>
+		<artifactId>dranura-superpom</artifactId>
+		<version>5.5.1.0-RC1</version>
+		<relativePath />
+	</parent>
+
+	<groupId>com.hybris.dataonboarding</groupId>
+	<artifactId>dataonboarding-project</artifactId>
+	<version>5.5.1.11</version>
+	<name>dataonboarding-project</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>dataonboarding-test-configuration</module>
+		<module>dataonboarding-oms</module>
+		<module>dataonboarding-integration-test</module>
+		<module>dataonboarding-framework</module>
+		<module>dataonboarding-ext</module>
+		<module>dataonboarding-webapp</module>
+		<module>dataonboarding-api</module>
+		<module>dataonboarding-service</module>
+		<module>dataonboarding-facade</module>
+		<module>dataonboarding-rest-resources</module>
+		<module>dataonboarding-rest-client</module>
+	</modules>
+
+	<properties>
+		<hybris.commons.version>5.5.1.0-RC1</hybris.commons.version>
+		<hybris.commons-framework.version>5.5.1.0-RC2</hybris.commons-framework.version>
+		<hybris.kernel.version>5.5.1.0-RC4</hybris.kernel.version>
+		<hybris.oms.version>5.5.1.11</hybris.oms.version>
+
+		<!--VERSION MUST BE KEPT SAME WITH PROJECT VERSION. DO NOT USE ${project.version} or ${parent.version} here.-->
+		<hybris.dataonboarding.version>5.5.1.11</hybris.dataonboarding.version>
+	</properties>
+
+	<scm>
+		<connection>scm:git:ssh://stash.hybris.com/oms/dataonboarding.git</connection>
+		<developerConnection>scm:git:ssh://stash.hybris.com/oms/dataonboarding.git</developerConnection>
+		<url>scm:git:ssh://stash.hybris.com/oms/dataonboarding.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-commons-archetype</artifactId>
+					<version>${hybris.commons-framework.version}</version>
+					<configuration>
+						<filterArtifacts>dataonboarding-ext</filterArtifacts>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-rest-client</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-api</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-framework</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-oms-basestore</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-oms-bin</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-oms-client</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-oms-inventory</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-oms-location</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-framework</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-webapp</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+				<type>war</type>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-webapp</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+				<classifier>classes</classifier>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hybris.dataonboarding</groupId>
+				<artifactId>dataonboarding-rest-resources</artifactId>
+				<version>${hybris.dataonboarding.version}</version>
+				<scope>runtime</scope>
+				<type>jar</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<!-- For resolving of superpom -->
+	<repositories>
+		<repository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+   <!-- For resolving of superpom java doc generation problem with java 1.8-->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+
+                <configuration combine.children="append">
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

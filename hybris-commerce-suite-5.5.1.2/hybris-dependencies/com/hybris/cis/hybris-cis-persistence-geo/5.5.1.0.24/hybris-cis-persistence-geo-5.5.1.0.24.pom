@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hybris.cis</groupId>
+		<artifactId>hybris-cis-server</artifactId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-persistence-geo</artifactId>
+	<name>hybris-cis-persistence-geo</name>
+
+	<dependencies>
+		<!--  CIS  -->
+		<dependency>
+	    	<groupId>com.hybris.cis</groupId>
+	    	<artifactId>hybris-cis-api-shared</artifactId>
+	    </dependency>
+	   	<dependency>
+	    	<groupId>com.hybris.cis</groupId>
+	    	<artifactId>hybris-cis-api-geolocation</artifactId>
+	    </dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-common</artifactId>
+		</dependency>
+		
+		<!-- Kernel -->
+        <dependency>
+            <groupId>com.hybris.kernel</groupId>
+            <artifactId>kernel-service</artifactId>
+            <version>${hybris.kernel.version}</version>
+        </dependency>
+  		<dependency>
+    		<groupId>com.hybris.kernel</groupId>
+    		<artifactId>jdbc-engine</artifactId>
+    		<version>${hybris.kernel.version}</version>
+		</dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-deps-spring</artifactId>
+            <type>pom</type>
+        </dependency>
+
+        <!-- DB -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-configuration</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.hybris.kernel</groupId>
+            <artifactId>mongodb-engine</artifactId>
+            <version>${hybris.kernel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mongo-java-driver</artifactId>
+                    <groupId>org.mongodb</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>mongo-java-driver</artifactId>
+            <groupId>org.mongodb</groupId>
+            <version>2.12.1</version>
+        </dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>com.hybris.kernel</groupId>
+                <artifactId>kernel-codegenerator</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+		</plugins>
+		
+		<pluginManagement>
+			<plugins>
+				<plugin>
+                    <groupId>com.hybris.kernel</groupId>
+                    <artifactId>kernel-codegenerator</artifactId>
+                    <version>${hybris.kernel.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generatemodels</id>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>generatemodels</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+			<!-- to make test classes available to other modules -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- to make source classes available to enunciate -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>				
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.kernel</groupId>
+										<artifactId>
+											kernel-codegenerator
+										</artifactId>
+										<versionRange>
+											[1.6.0,)
+										</versionRange>
+										<goals>
+											<goal>generatemodels</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+</project>

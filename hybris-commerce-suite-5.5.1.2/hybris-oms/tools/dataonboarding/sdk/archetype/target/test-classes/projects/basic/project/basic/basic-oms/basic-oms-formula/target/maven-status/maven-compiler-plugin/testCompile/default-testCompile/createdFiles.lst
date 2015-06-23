@@ -1,0 +1,5 @@
+it/pkg/oms/formula/FormulaTestUtils.class
+it/pkg/oms/formula/FormulaUpdateEndpointAdapterTest.class
+it/pkg/oms/formula/FormulaDeleteEndpointAdapterTest.class
+it/pkg/oms/formula/FormulaInsertEndpointAdapterTest.class
+it/pkg/oms/formula/Map2FormulaTransformerTest.class

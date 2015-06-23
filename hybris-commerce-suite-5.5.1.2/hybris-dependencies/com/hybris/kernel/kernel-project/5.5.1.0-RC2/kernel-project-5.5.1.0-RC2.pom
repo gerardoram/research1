@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.kernel</groupId>
+		<artifactId>kernel</artifactId>
+		<version>5.5.1.0-RC2</version>
+	</parent>
+
+	<artifactId>kernel-project</artifactId>
+	<name>kernel-project</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>kernel-utils</module>
+		<module>kernel-type-system</module>
+		<module>kernel-codegenerator</module>
+		<module>kernel-farm</module>
+		<module>kernel-persistence</module>
+		<module>persistence-engines/mongodb-engine</module>
+		<module>persistence-engines/neo4j-engine</module>
+		<module>persistence-engines/jdbc-engine</module>
+		<module>persistence-engines/mock-engine</module>
+		<module>kernel-service</module>
+		<module>kernel-cache</module>
+		<module>kernel-scheduler</module>
+		<module>kernel-aggregation</module>
+		<module>jdbc-aggregation</module>
+		<module>kernel-media</module>
+		<module>kernel-metadata</module>
+		<module>kernel-media-gridfs</module>
+		<module>kernel-media-jdbc</module>
+		<module>dto-generator</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<!-- Please do not use argLine. It breakes dynatrace integration. <argLine>-Xmx512m</argLine>. 
+							Add argLine params in your settings.xml file instead -->
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-spring</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>test-configuration</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-test-utils</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.lambdaj</groupId>
+			<artifactId>lambdaj</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,20 @@
+id,active,description,statusCode,version
+OrderLineQuantityStatusData|1,TRUE,OPEN,OPEN,1
+OrderLineQuantityStatusData|2,TRUE,ON_HOLD,ON_HOLD,1
+OrderLineQuantityStatusData|3,TRUE,SHIPPED,SHIPPED,1
+OrderLineQuantityStatusData|4,TRUE,CANCELLED,CANCELLED,1
+OrderLineQuantityStatusData|5,TRUE,REJECTED,REJECTED,1
+OrderLineQuantityStatusData|6,TRUE,RMA REQUEST,RMA_REQUEST,1
+OrderLineQuantityStatusData|7,TRUE,RMA PENDING,RMA_PENDING,1
+OrderLineQuantityStatusData|8,TRUE,RMA COMPLETE,RMA_COMPLETE,1
+OrderLineQuantityStatusData|9,TRUE,RMA REJECTED,RMA_REJECTED,1
+OrderLineQuantityStatusData|10,TRUE,SOURCED,SOURCED,1
+OrderLineQuantityStatusData|11,TRUE,ALLOCATED,ALLOCATED,1
+OrderLineQuantityStatusData|12,TRUE,SOURCED2,SOURCED2,1
+OrderLineQuantityStatusData|13,TRUE,PICKED,PICKED,1
+OrderLineQuantityStatusData|14,TRUE,PACKED,PACKED,1
+OrderLineQuantityStatusData|15,TRUE,PAYMENT CAPTURED,PAYMENT_CAPTURED,1
+OrderLineQuantityStatusData|16,TRUE,TAX INVOICED,TAX_INVOICED,1
+OrderLineQuantityStatusData|17,TRUE,MANUAL DECLINED,MANUAL_DECLINED,1
+OrderLineQuantityStatusData|18,TRUE,FAILED_PAYMENT,FAILED_PAYMENT,1
+OrderLineQuantityStatusData|19,TRUE,FAILED_TAX,FAILED_TAX,1

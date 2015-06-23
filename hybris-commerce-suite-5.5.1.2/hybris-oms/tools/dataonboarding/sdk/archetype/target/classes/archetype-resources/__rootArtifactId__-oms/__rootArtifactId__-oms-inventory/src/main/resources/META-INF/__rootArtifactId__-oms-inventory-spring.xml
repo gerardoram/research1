@@ -1,0 +1,35 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="map2inventoryTransformer" class="${package}.oms.inventory.CustomMap2InventoryTransformer">
+		<property name="map2InventoryTransformer" ref="defaultMap2inventoryTransformer"/>
+	</bean>
+
+	<bean id="inventoryCustomEndpointAdapter" class="${package}.oms.inventory.InventoryCustomEndpointAdapter">
+	</bean>
+
+    <camelContext id="dataonboarding.inventoryCustom" xmlns="http://camel.apache.org/schema/spring"
+                  depends-on="dataonboarding">
+        <endpoint id="dataonboarding.csv.inventory.custom.scanDir"
+                  uri="file://${symbol_dollar}{dataonboarding.inputDirectory}?delay=${symbol_dollar}{dataonboarding.inventorycustom.delay}&amp;antInclude=*/inventoryCustom/*.${symbol_dollar}{dataonboarding.fileextension.csv:csv}&amp;${symbol_dollar}{dataonboarding.scan.common.opts}"/>
+
+        <route id="dataonboarding.csv.inventory.custom.scanRoute">
+            <from ref="dataonboarding.csv.inventory.custom.scanDir"/>
+            <to uri="context:dataonboarding:csv"/>
+        </route>
+
+        <route id="dataonboarding.inventoryCustomDomainRoute"
+               errorHandlerRef="sliceErrorHandler">
+            <from uri="direct:dataonboarding.inventoryCustom"/>
+            <bean ref="map2inventoryTransformer"/>
+            <bean ref="inventoryCustomEndpointAdapter"/>
+        </route>
+    </camelContext>
+</beans>

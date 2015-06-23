@@ -1,0 +1,30 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<types xmlns="http://www.hybris.com/schema/ondemand/domain" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hybris.com/schema/onpremise/domain http://www.hybris.com/schema/onpremise/domain-5.3.xsd" 
+	package="com.hybris.oms.domain">
+
+	<managedobjects>
+		
+		<managedobject code="OrderData" mixin="true">
+		    <attributes>
+		        <attribute name="dummy" type="String" />
+		    </attributes>
+		</managedobject>
+	
+		<managedobject code="DummyObjectData" properties="true">
+			<persistence name="DummyObjectData" />
+			<attributes>
+				<attribute name="name" type="String">
+					<modifiers mandatory="true" unique="true" />
+				</attribute>
+				<attribute name="dummyProperty" type="String">
+				</attribute>
+			</attributes>
+			<pk>
+				<attribute name="name" />
+			</pk>
+		</managedobject>
+	</managedobjects>
+</types>

@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Feb 26 12:21:59 CET 2015
+builddate=20150226 1221
+description=eventtrackingwsaddon
+name=eventtrackingwsaddon
+releasedate=20150224 1105
+vendor=hybris
+version=5.5.1.0
+version.api=5.5.1

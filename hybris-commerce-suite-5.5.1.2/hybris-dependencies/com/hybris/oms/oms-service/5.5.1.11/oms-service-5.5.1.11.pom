@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>order-management-modules</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>oms-service</artifactId>
+	<name>oms-service</name>
+	<packaging>jar</packaging>
+
+	<description>This layer handles resource management and transaction management activities.</description>
+
+
+	<dependencies>
+		
+		<!-- OMS-Core dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-service</artifactId>
+			<classifier>sdk</classifier>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-core-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-core-rest-client</artifactId>
+			<!-- For CIS rest-clients deps -->
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.oms</groupId>
+					<artifactId>oms-core-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- OMS dependencies -->
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-domain-objects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-deps-spring</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<!-- CIS Dependencies -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-geolocation-rest-client</artifactId>
+			<version>${hybris-cis.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-payment-rest-client</artifactId>
+			<version>${hybris-cis.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-shipping-rest-client</artifactId>
+			<version>${hybris-cis.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-tax-rest-client</artifactId>
+			<version>${hybris-cis.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>com.hybris.kernel</groupId>
+			<artifactId>kernel-test-utils</artifactId>
+			<version>${hybris.kernel.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hybris.commons</groupId>
+					<artifactId>hybris-deps-test</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.168</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>local.properties</exclude>
+					<exclude>logback.xml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${lifecycle.mapping.version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.kernel</groupId>
+										<artifactId>kernel-codegenerator</artifactId>
+										<versionRange>[$hybris.kernel.version},)</versionRange>
+										<goals>
+											<goal>generatemodels</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore/>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.hybris.kernel</groupId>
+					<artifactId>kernel-codegenerator</artifactId>
+					<version>${hybris.kernel.version}</version>
+					<executions>
+						<execution>
+							<id>generatemodels</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generatemodels</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.bval</groupId>
+							<artifactId>bval-jsr303</artifactId>
+							<version>0.5</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>kernel-codegenerator</artifactId>
+				<configuration>
+					<searchForDomainInClasspath>true</searchForDomainInClasspath>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classifier>${envClassifier}</classifier>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>sdk</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>sdk</classifier>
+							<excludes>
+								<exclude>**/managedobjects/**</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

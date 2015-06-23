@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.hybris.dataonboarding</groupId>
+        <artifactId>dataonboarding-project</artifactId>
+		<version>5.5.1.11</version>
+    </parent>
+
+    <artifactId>dataonboarding-oms</artifactId>
+    <name>dataonboarding-oms</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dataonboarding-oms-location</module>
+        <module>dataonboarding-oms-inventory</module>
+        <module>dataonboarding-oms-bin</module>
+        <module>dataonboarding-oms-basestore</module>
+        <module>dataonboarding-oms-client</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hybris.dataonboarding</groupId>
+            <artifactId>dataonboarding-test-configuration</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hybris.dataonboarding</groupId>
+            <artifactId>dataonboarding-framework</artifactId>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hybris.commons</groupId>
+            <artifactId>hybris-deps-spring</artifactId>
+            <type>pom</type>
+        </dependency>
+
+		<dependency>
+			<groupId>com.hybris.commons</groupId>
+			<artifactId>hybris-commons-conversion</artifactId>
+			<version>${hybris.commons-framework.version}</version>
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>kernel-api</artifactId>
+        			<groupId>com.hybris.kernel</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>kernel-service</artifactId>
+        			<groupId>com.hybris.kernel</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
+    </dependencies>
+</project>

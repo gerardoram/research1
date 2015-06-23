@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.hybris.oms</groupId>
+		<artifactId>order-management-system-project</artifactId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>order-management-system</artifactId>
+	<name>order-management-system</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>order-management-api</module>
+		<module>order-management-modules</module>
+		<module>order-management-integration-test</module>
+		<module>order-management-export</module>
+		<module>order-management-ui</module>
+	</modules>
+
+
+	<profiles>
+		<profile>
+			<id>btc</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>**/oms/export/**/*.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<!-- include this in superpom?? -->
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.hybris.kernel</groupId>
+					<artifactId>kernel-codegenerator</artifactId>
+					<version>${hybris.kernel.version}</version>
+					<executions>
+						<execution>
+							<id>generatemodels</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generatemodels</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.hybris.kernel</groupId>
+					<artifactId>init-app-maven-plugin</artifactId>
+					<version>${hybris.kernel.version}</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>${lifecycle.mapping.version}</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.hybris.kernel</groupId>
+										<artifactId>kernel-codegenerator</artifactId>
+										<versionRange>[$project.version},)</versionRange>
+										<goals>
+											<goal>generatemodels</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore/>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- For resolving of superpom -->
+	<repositories>
+		<repository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>hybris-repository</id>
+			<url>https://repository.hybris.com/hybris-repository</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
+

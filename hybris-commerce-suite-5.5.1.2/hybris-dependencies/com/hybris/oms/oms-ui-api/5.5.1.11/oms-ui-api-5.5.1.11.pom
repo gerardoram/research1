@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>order-management-ui</artifactId>
+		<groupId>com.hybris.oms</groupId>
+		<version>5.5.1.11</version>
+	</parent>
+
+	<artifactId>oms-ui-api</artifactId>
+	<name>oms-ui-api</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hybris.oms</groupId>
+			<artifactId>oms-api</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.hybris.kernel</groupId>
+				<artifactId>dto-generator</artifactId>
+				<version>${hybris.kernel.version}</version>
+				<executions>
+					<execution>
+						<id>dto</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>dto</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classifier>${envClassifier}</classifier>
+				</configuration>
+				<executions>
+
+					<execution>
+						<id>sdk</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>sdk</classifier>
+
+							<excludes>
+								<exclude>**/ui/api/order/UIOrder*.class</exclude>
+								<exclude>**/ui/api/order/UIOrderDetails*.class</exclude>
+
+								<exclude>**/ui/api/returns/ReturnDetail.class</exclude>
+								<exclude>**/ui/api/returns/ReturnDetail$*.class</exclude>
+
+
+								<exclude>**/ui/api/shipment/OrderLineShipmentPickSlipBinInfo*.class</exclude>
+								<exclude>**/ui/api/shipment/OrderShipmentDetail*.class</exclude>
+								<exclude>**/ui/api/shipment/OrderShipmentList*.class</exclude>
+
+								<exclude>**/ui/api/shipment/PickSlipBin*.class</exclude>
+								<exclude>**/ui/api/shipment/ShipmentDetail*.class</exclude>
+
+								<exclude>**/ui/api/shipment/UIShipment*.class</exclude>
+							</excludes>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>

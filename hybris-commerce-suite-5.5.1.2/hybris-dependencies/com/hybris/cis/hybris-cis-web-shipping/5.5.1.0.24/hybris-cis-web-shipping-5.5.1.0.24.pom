@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>hybris-cis-server</artifactId>
+		<groupId>com.hybris.cis</groupId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-web-shipping</artifactId>
+	<name>hybris-cis-web-shipping</name>
+
+	<properties>
+		<enunciate.skip>false</enunciate.skip>
+		<maven.site.skip>false</maven.site.skip>
+	</properties>
+
+	<dependencies>
+		<!-- CIS API -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-web-shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-shipping</artifactId>
+		</dependency>
+
+		<!-- Dependencies sources are required for enunciate -->
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-shipping</artifactId>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hybris.cis</groupId>
+			<artifactId>hybris-cis-api-shared</artifactId>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

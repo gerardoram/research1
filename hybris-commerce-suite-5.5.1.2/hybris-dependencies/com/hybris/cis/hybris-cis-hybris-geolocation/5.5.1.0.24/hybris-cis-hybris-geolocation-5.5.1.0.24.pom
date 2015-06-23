@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>hybris-cis-vendor</artifactId>
+		<groupId>com.hybris.cis</groupId>
+		<version>5.5.1.0.24</version>
+	</parent>
+
+	<artifactId>hybris-cis-hybris-geolocation</artifactId>
+	<name>hybris-cis-hybris-geolocation</name>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>hybris-cis-geolocation</module>
+		<module>hybris-cis-geolocation-web</module>
+	</modules>
+
+	<dependencies>
+    <dependency>
+      <groupId>com.hybris.cis</groupId>
+      <artifactId>hybris-cis-api-geolocation</artifactId>
+      <version>${project.version}</version>
+    </dependency>  
+  </dependencies> 
+</project>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2015 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+<project name="xyformsbackoffice_buildcallbacks">
+   <macrodef name="xyformsbackoffice_after_build">
+		<sequential>
+          <if>
+             <available file="${ext.xyformsbackoffice.path}/backup/backoffice-web.xml"/>
+             <then>
+                <echo level="info" message="backoffice has been already patched" />
+             </then>
+             <else>
+                <xyformsbackoffice_create_backup_dir />
+                <xyformsbackoffice_create_do_backup />
+                <xyformsbackoffice_create_temp_dir />
+                <xyformsbackoffice_patch_backoffice_web_xml />
+                <xyformsbackoffice_patch_backoffice_extensioninfo_xml />
+                <xyformsbackoffice_replace_patched_web_xml />
+                <xyformsbackoffice_replace_patched_extensioninfo_xml />
+                <xyformsbackoffice_remove_temp_dir />
+             </else>
+          </if>
+		</sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_after_clean">
+      <sequential>
+         <echo level="info" message="restoring backoffice files" />
+         <if>
+            <available file="${ext.xyformsbackoffice.path}/backup/backoffice-web.xml"/>
+            <then>
+               <copy tofile="${ext.backoffice.path}/web/webroot/WEB-INF/web.xml" file="${ext.xyformsbackoffice.path}/backup/backoffice-web.xml" overwrite="true" verbose="true" />
+               <copy tofile="${ext.backoffice.path}/extensioninfo.xml" file="${ext.xyformsbackoffice.path}/backup/backoffice-extensioninfo.xml" overwrite="true" verbose="true" />
+               <delete includeEmptyDirs="true">
+                 <fileset dir="${ext.xyformsbackoffice.path}/backup" />
+               </delete>
+            	<delete file="${ext.backoffice.path}/web/webroot/WEB-INF/urlrewrite.xml" />
+            </then>
+         </if>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_create_do_backup">
+      <sequential>
+         <echo level="info" message="backuping backoffice files" />
+         <copy file="${ext.backoffice.path}/web/webroot/WEB-INF/web.xml" tofile="${ext.xyformsbackoffice.path}/backup/backoffice-web.xml" overwrite="none" verbose="true" />
+         <copy file="${ext.backoffice.path}/extensioninfo.xml" tofile="${ext.xyformsbackoffice.path}/backup/backoffice-extensioninfo.xml" overwrite="none" verbose="true" />
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_create_backup_dir">
+      <sequential>
+         <echo level="info" message="creating backup dir" />
+         <mkdir dir="${ext.xyformsbackoffice.path}/backup" />
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_create_temp_dir">
+      <sequential>
+         <echo level="info" message="creating temp dir" />
+         <mkdir dir="${ext.xyformsbackoffice.path}/temp"/>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_remove_temp_dir">
+      <sequential>
+         <echo level="info" message="removing temp dir" />
+         <delete includeEmptyDirs="true">
+           <fileset dir="${ext.xyformsbackoffice.path}/temp" />
+         </delete>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_remove_backup_dir">
+      <sequential>
+         <echo level="info" message="removing backup dir" />
+         <delete includeEmptyDirs="true">
+           <fileset dir="${ext.xyformsbackoffice.path}/backup" />
+         </delete>
+      </sequential>
+   </macrodef>
+	
+   <macrodef name="xyformsbackoffice_patch_backoffice_web_xml">
+      <sequential>
+         <echo level="info" message="patching backoffice's web.xml to support orbeon proxying..."/>
+         <copy file="${ext.xyformsbackoffice.path}/patch/urlrewrite.xml" tofile="${ext.backoffice.path}/web/webroot/WEB-INF/urlrewrite.xml" overwrite="true" verbose="true" />
+         <xmltask source="${ext.backoffice.path}/web/webroot/WEB-INF/web.xml" dest="${ext.xyformsbackoffice.path}/temp/web.xml">
+             <remove path="//*[name()='servlet-mapping'][contains(./servlet-name, 'YFormsProxyServlet')]"/>
+             <remove path="//*[name()='servlet'][contains(.//*[name()='servlet-name'], 'YFormsProxyServlet')]"/>
+             <remove path="//*[name()='servlet-mapping'][contains(.//*[name()='servlet-name'], 'YFormsProxyServlet')]"/>
+             <remove path="//*[name()='filter'][contains(.//*[name()='filter-name'], 'UrlRewriteFilter')]"/>
+             <remove path="//*[name()='filter-mapping'][contains(.//*[name()='filter-name'], 'UrlRewriteFilter')]"/>
+             <remove path="//*[name()='filter-mapping'][contains(.//*[name()='url-pattern'], '/orbeon/*')]"/>
+             <insert path="//*[name()='servlet'][last()]" position="after">
+               <![CDATA[
+                  <servlet xmlns="http://java.sun.com/xml/ns/javaee">
+                     <servlet-name>YFormsProxyServlet</servlet-name>
+                     <servlet-class>de.hybris.platform.xyformsfacades.proxy.servlet.YFormsProxyServlet</servlet-class>
+                  </servlet>
+                  <servlet-mapping xmlns="http://java.sun.com/xml/ns/javaee">
+                     <servlet-name>YFormsProxyServlet</servlet-name>
+                     <url-pattern>/orbeon/*</url-pattern>
+                  </servlet-mapping>
+               ]]>
+             </insert>
+             <insert path="//*[name()='filter-mapping'][last()]" position="after">
+              <![CDATA[
+             	 <!-- Spring Security -->
+                <filter-mapping xmlns="http://java.sun.com/xml/ns/javaee">
+                   <filter-name>springSecurityFilterChain</filter-name>
+                   <url-pattern>/orbeon/*</url-pattern>
+                </filter-mapping>
+             	 <!-- Url Rewriter to Forbid URLS -->
+             	 <filter xmlns="http://java.sun.com/xml/ns/javaee">
+             	    <filter-name>UrlRewriteFilter</filter-name>
+             	    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	               <init-param>
+	                   <param-name>logLevel</param-name>
+	                   <param-value>LOG4J</param-value>
+	               </init-param>
+	               <init-param>
+	                   <param-name>confReloadCheckInterval</param-name>
+	                   <param-value>-1</param-value>
+	               </init-param>
+               </filter>
+             	 <filter-mapping xmlns="http://java.sun.com/xml/ns/javaee">
+             	    <filter-name>UrlRewriteFilter</filter-name>
+             	    <url-pattern>/orbeon/*</url-pattern>
+             	    <dispatcher>REQUEST</dispatcher>
+             	    <dispatcher>FORWARD</dispatcher>
+             	</filter-mapping>
+             	]]>
+             </insert>
+          </xmltask>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_patch_backoffice_extensioninfo_xml">
+      <sequential>
+          <echo level="info" message="patching backoffice's extensioninfo.xml to support orbeon proxying..."/>
+
+          <xmltask source="${ext.backoffice.path}/extensioninfo.xml" dest="${ext.xyformsbackoffice.path}/temp/extensioninfo.xml">
+             <remove path="//*[name()='requires-extension'][contains(./@name, 'xyformsservices')]"/>
+             <remove path="//*[name()='requires-extension'][contains(./@name, 'xyformsfacades')]"/>
+             <insert path="//*[name()='coremodule']" position="before">
+               <![CDATA[
+                  <requires-extension name="xyformsservices"/>
+                  <requires-extension name="xyformsfacades"/>
+               ]]>
+             </insert>
+          </xmltask>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_replace_patched_web_xml">
+      <sequential>
+          <echo level="info" message="replacing patched web.xml file..."/>
+          <copy todir="${ext.backoffice.path}/web/webroot/WEB-INF/" overwrite="true" verbose="true" filtering="false">
+             <fileset dir="${ext.xyformsbackoffice.path}/temp/">
+                <include name="web.xml" />
+             </fileset>
+          </copy>
+      </sequential>
+   </macrodef>
+
+   <macrodef name="xyformsbackoffice_replace_patched_extensioninfo_xml">
+      <sequential>
+          <echo level="info" message="replacing patched extensioninfo.xml file..."/>
+          <copy todir="${ext.backoffice.path}/" overwrite="true" verbose="true" filtering="false">
+             <fileset dir="${ext.xyformsbackoffice.path}/temp/">
+                <include name="extensioninfo.xml" />
+             </fileset>
+          </copy>
+      </sequential>
+   </macrodef>
+   
+</project>
