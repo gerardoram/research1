@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hybris.mobile.lib.b2b.tests"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Sync Adapter -->
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
+    <application>
+
+        <!-- Content provider and sync adapter -->
+        <service android:name="com.hybris.mobile.lib.b2b.sync.CatalogAuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name="com.hybris.mobile.lib.b2b.sync.CatalogSyncService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="url_backend"
+                android:value="@string/url_backend" />
+
+            <meta-data
+                android:name="url_path_catalog"
+                android:value="@string/url_path_catalog" />
+
+            <meta-data
+                android:name="url_parameter_catalog"
+                android:value="@string/url_parameter_catalog" />
+
+            <meta-data
+                android:name="account_name"
+                android:value="@string/account_name" />
+
+            <meta-data
+                android:name="account_type"
+                android:value="@string/account_type" />
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+
+        <provider
+            android:name="com.hybris.mobile.lib.b2b.provider.CatalogProvider"
+            android:authorities="@string/provider_authority"
+            android:exported="false"
+            android:syncable="true">
+
+            <meta-data
+                android:name="db_name"
+                android:value="@string/db_name" />
+
+            <meta-data
+                android:name="db_version"
+                android:value="@integer/db_version" />
+
+        </provider>
+    </application>
+
+</manifest>

@@ -1,0 +1,5 @@
+include ':hybrisMobileB2BLibrary'
+include ':hybrisMobileHTTPClientLibrary'
+include ':hybrisMobileUILibrary'
+include ':hybrisMobileLocationLibrary'
+include ':hybrisMobileB2BApp'

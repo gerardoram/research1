@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hockeyapp_app_id"></string>
+    <string name="googlemaps_api_key"></string>
+
+    <string name="url_backend"></string>
+    <string name="url_path_catalog">/powertools</string>
+    <string name="url_parameter_catalog">powertoolsProductCatalog</string>
+
+    <string name="name_storefront">POWERTOOLS</string>
+    <string name="link_storefront"></string>
+
+    <string name="provider_authority"></string>
+    <string name="account_name">hybris</string>
+    <string name="account_type">hybris</string>
+    <string name="db_name">hybris_mobile_b2b</string>
+    <integer name="db_version">1</integer>
+
+    <integer name="pagesize">20</integer>
+
+    <string name="default_qty">1</string>
+
+    <integer name="default_store_locator_radius">10000</integer>
+
+    <integer name="grid_portrait_nb_items">3</integer>
+    <integer name="grid_landscape_nb_items">5</integer>
+
+    <string name="intent_action_resume">com.hybris.mobile.intent.action.resume</string>
+
+    <bool name="animationOnLoginPage">false</bool>
+
+    <string name="preference_key_key_base_url">preference_key_key_base_url</string>
+    <string name="preference_key_value_base_url">preference_key_value_base_url</string>
+
+    <string-array name="backend_url_keys">
+        <item>Internal</item>
+        <item>External</item>
+        <item>Local</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="backend_url_values">
+        <item>https://dev-b2bmobile-3.yrdrt.fra.hybris.com:9002</item>
+        <item>https://b2b-playmobile.yrdrt.fra.hybris.com:9002</item>
+        <item>https://10.0.2.2:9002</item>
+        <item>http://</item>
+    </string-array>
+
+</resources>

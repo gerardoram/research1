@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="url_backend">https://dev-b2bmobile-3.yrdrt.fra.hybris.com:9002</string>
+    <string name="url_path_catalog">/powertools</string>
+    <string name="url_parameter_catalog">powertoolsProductCatalog</string>
+    <string name="provider_authority">@string/sync_default_authority</string>
+    <string name="account_name">hybris</string>
+    <string name="account_type">hybris</string>
+    <string name="default_category">1</string>
+    <string name="db_name">1</string>
+    <integer name="db_version">1</integer>
+
+</resources>

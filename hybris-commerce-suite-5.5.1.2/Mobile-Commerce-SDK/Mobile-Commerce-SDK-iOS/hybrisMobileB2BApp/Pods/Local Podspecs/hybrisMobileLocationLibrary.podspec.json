@@ -1,0 +1,25 @@
+{
+  "name": "hybrisMobileLocationLibrary",
+  "version": "5.5.0",
+  "summary": "Hybris Mobile Location Library that contains SDK functionality to display located items on a map",
+  "description": "                        Hybris Mobile Location Library.\n                        You should reference this pod from your app and use the domain specific library interface (e.g. b2b) in your controllers.\n",
+  "homepage": "https://wiki.hybris.com/display/b2b/IOS+Architecture+-+5.5",
+  "license": "Commercial",
+  "authors": {
+    "Playmobile IOS Team Hybris": "yann.bouschet@hybris.com"
+  },
+  "source": {
+    "git": "https://stash.hybris.com/projects/MOBILE/repos/b2bios/browse/hybrisMobileLocationLibrary",
+    "tag": "5.5.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes",
+  "resource_bundles": {
+    "hybrisMobileLocationLibrary": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}
